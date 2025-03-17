@@ -1,10 +1,10 @@
+#include "src/Reservation.hpp"
 #include <iostream>
-#include "Reservation.hpp"
 
 using namespace std;
 
 int main()
 {
-    Reservation R;
+    Reservation a;
     cout << "Project init!!\n";
 }
