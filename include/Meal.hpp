@@ -1,21 +1,16 @@
 #ifndef MEAL_HPP
 #define MEAL_HPP
 #include "DiningHall.hpp"
+#include "Utilities.hpp"
 #include <vector>
 using namespace std;
-enum class MealType
-{
-    BREAKFAST,
-    DINNER,
-    LAUNCH
-};
 
 class Meal
 {
 public:
     Meal();
-    Meal(string name, float price, vector<string> sideItems, DiningHall serves_in);
-
+    Meal(string name, float price, vector<string> sideItems);
+    ReserveDay getReserveDay() const { return _reserveDay; }
     // Getters
     int getMealID() const { return _mealID; }
     string getName() const { return _name; }
@@ -30,6 +25,7 @@ public:
     void setPrice(float price) { _price = price; }
     void setMealType(MealType mealType) { _mealType = mealType; }
     void setSideItems(vector<string> sideItems) { _sideItems = sideItems; }
+    void setResesrveDay(ReserveDay reserveDay) { _reserveDay = reserveDay; }
 
     // Activation and DeActivation
     void activate() { _isActive = true; }
@@ -46,10 +42,8 @@ private:
     float _price;
     bool _isActive;
     MealType _mealType;
+    ReserveDay _reserveDay;
     vector<string> _sideItems;
-
-    // relation
-    DiningHall _dinginHall;
 };
 
 #endif

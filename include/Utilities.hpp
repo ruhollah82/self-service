@@ -14,4 +14,22 @@ enum class StudentOptions
     EXIT
 };
 
+enum class ReserveDay
+{
+    SAT,
+    SUN,
+    MON,
+    TUE,
+    WED,
+    THU,
+    FRI
+};
+
+enum class MealType
+{
+    BREAKFAST,
+    LUNCH,
+    DINNER
+};
+
 #endif

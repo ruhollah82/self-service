@@ -20,13 +20,13 @@ void DiningHall::print()
 
 // Default constructor
 Meal::Meal()
-    : _mealID(0), _name(""), _price(0.0), _isActive(false), _mealType(MealType::BREAKFAST), _dinginHall(DiningHall())
+    : _mealID(0), _name(""), _price(0.0), _isActive(false), _mealType(MealType::BREAKFAST)
 {
 }
 
 // Parameterized constructor
-Meal::Meal(string name, float price, vector<string> sideItems, DiningHall serves_in)
-    : _mealID(0), _name(name), _price(price), _isActive(true), _mealType(MealType::BREAKFAST), _sideItems(sideItems), _dinginHall(serves_in)
+Meal::Meal(string name, float price, vector<string> sideItems)
+    : _mealID(0), _name(name), _price(price), _isActive(true), _mealType(MealType::BREAKFAST), _sideItems(sideItems)
 {
 }
 void Meal::print()
@@ -45,8 +45,8 @@ void Meal::print()
     case MealType::DINNER:
         cout << "Dinner";
         break;
-    case MealType::LAUNCH:
-        cout << "Launch";
+    case MealType::LUNCH:
+        cout << "Lunch";
         break;
     }
     cout << endl;

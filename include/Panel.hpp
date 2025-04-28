@@ -18,6 +18,7 @@ public:
     void Action(int);
     void showMenu();
     void showStudentInfo();
+    void checkBalance();
     void viewReservations();
     void addReservation(const Reservation &reservation);
     void reserveMeal();
@@ -26,12 +27,16 @@ public:
     void increaseBalance(float amount);
     void viewRecentTransactions();
     void cancelReservation(int reservationID);
-    void checkBalance();
     void exit();
     void defaultOption();
 
 private:
-    StudentOptions _mapping(int);
+    ReserveDay _chooseDay();
+    Meal _chooseMeal(MealType, ReserveDay);
+    DiningHall _chooseDiningHall();
+    MealType _chooseMealType();
+    StudentOptions
+    _mapping(int);
     Student &_student;
     static vector<pair<string, StudentOptions>> _MenuOptions;
     vector<Reservation> _reservations;
