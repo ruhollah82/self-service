@@ -21,7 +21,7 @@ RStatus Reservation::getStatus() const
 {
     return _status;
 }
-time_t Reservation::getCreatedAt() const
+time_t Reservation::getCreatedAT() const
 {
     return _createdAT;
 }

@@ -24,6 +24,7 @@ public:
     RStatus getStatus() const;
     time_t getCreatedAt() const;
     int getReservationID() const;
+    time_t getCreatedAT() const;
 
     void setMeal(Meal meal);
     void setDiningHall(DiningHall dHall);
