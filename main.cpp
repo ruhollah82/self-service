@@ -13,19 +13,11 @@ int main()
     Student student("4011226319", "alireza", "sharifi", "1234");
 
     // Create a sample Meal object
-    Meal meal();
+    Meal meal;
 
-    DiningHall diningHall("Main Dining Hall", "123 University St.");
+    DiningHall diningHall;
     // Create a sample Reservation object
     Reservation reservation(2, student, diningHall, meal, RStatus::SUCCESS, time(0));
 
-    // Create a sample DiningHall object
-    diningHall.addMeal(meal);
-
-    // Output sample data
-    cout << "Student: " << student.getName() << endl;
-    cout << "Meal: " << meal.getName() << " - $" << meal.getPrice() << endl;
-    cout << "Reservation: " << reservation.getDate() << " at " << reservation.getTime() << endl;
-    cout << "Dining Hall: " << diningHall.getName() << " located at " << diningHall.getLocation() << endl;
     return 0;
 }

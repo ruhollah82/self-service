@@ -1,7 +1,6 @@
 #include "../include/Meal.hpp"
 #include "../include/DiningHall.hpp"
 #include <iostream>
-#include "Meal.hpp"
 using namespace std;
 
 // DiningHall -------------------------------------------------
