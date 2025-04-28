@@ -4,7 +4,12 @@
 
 // Default constructor
 Reservation::Reservation()
-    : _reservationID(0), _dHall(), _student(*(new Student())), _meal(), _status(RStatus::FAILED), _createdAT(time(nullptr))
+    : _reservationID(0), _student(nullptr), _dHall(), _meal(), _status(RStatus::FAILED), _createdAT(time(nullptr))
+{
+}
+
+Reservation::Reservation(int reservationID, Student &student, const DiningHall &dHall, const Meal &meal, RStatus status, time_t createdAT)
+    : _reservationID(reservationID), _student(&student), _dHall(dHall), _meal(meal), _status(status), _createdAT(createdAT)
 {
 }
 
@@ -44,13 +49,4 @@ void Reservation::setStatus(RStatus status)
 void Reservation::setCreatedAt(time_t createdAT)
 {
     _createdAT = createdAT;
-}
-
-// Getters and Setters
-
-// Parameterized constructor
-Reservation::Reservation(int reservationID, Student &student, const DiningHall &dHall, const Meal &meal, RStatus status, time_t createdAT)
-
-    : _reservationID(reservationID), _dHall(dHall), _student(student), _meal(meal), _status(status), _createdAT(createdAT)
-{
 }

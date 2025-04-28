@@ -33,7 +33,7 @@ public:
 
 private:
     int _reservationID;
-    Student &_student;
+    Student *_student; // Change reference to pointer
     DiningHall _dHall;
     Meal _meal;
     RStatus _status;

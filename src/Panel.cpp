@@ -186,16 +186,3 @@ void Panel::viewRecentTransactions()
         showing the recent transactions
     */
 }
-
-void Panel::cancelReservation(int reservationID)
-{
-    /*
-        cancelling the reservation
-    */
-}
-void Panel::checkBalance()
-{
-    /*
-        checking the balance
-    */
-}

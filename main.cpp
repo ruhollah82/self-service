@@ -1,5 +1,5 @@
 #include "include/Reservation.hpp"
-#include "include/User.hpp"
+#include "include/Student.hpp"
 #include "include/Meal.hpp"
 #include "include/DiningHall.hpp"
 
@@ -10,7 +10,7 @@ using namespace std;
 int main()
 {
     // Create a sample Student object
-    Student student("4011226319", "alireza", "sharifi", "1234");
+    Student student;
 
     // Create a sample Meal object
     Meal meal;
