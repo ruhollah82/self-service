@@ -27,6 +27,8 @@ public:
     void viewRecentTransactions();
     void cancelReservation(int reservationID);
     void checkBalance();
+    void exit();
+    void defaultOption();
 
 private:
     StudentOptions _mapping(int);

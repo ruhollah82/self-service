@@ -91,72 +91,53 @@ void Panel::Action(int option)
     {
     case StudentOptions::RESERVE_MEAL:
     {
-        cout << "Reserving a meal..." << endl;
-        /*
-            creating a reservation instance and then Add it to Shoping cart.
-        */
+        reserveMeal();
 
         break;
     }
     case StudentOptions::CONFIRM_SHOPPING_CART:
     {
-        cout << "Confirming the shopping cart..." << endl;
-        // Placeholder logic for confirming the shopping cart
-        // You can integrate this with the ShoppingCart class
+        confirmShoppingCart();
         break;
     }
     case StudentOptions::REMOVE_SHAPPING_CART_ITEM:
     {
-        cout << "Removing an item from the shopping cart..." << endl;
-        // Placeholder logic for removing an item from the shopping cart
+        removeShoppingCartItem();
         break;
     }
     case StudentOptions::BALANCE_INCREASE:
     {
-        cout << "Increasing balance..." << endl;
-        float amount;
-        cout << "Enter the amount to add to your balance: ";
-        cin >> amount;
-        _student.setBalance(_student.getBalance() + amount);
-        cout << "Balance updated successfully!" << endl;
+        increaseBalance(100.0f); // Example amount
         break;
     }
     case StudentOptions::CANLCELLING_RESERVATION:
     {
-        cout << "Cancelling a reservation..." << endl;
-        int reservationID;
-        cout << "Enter the reservation ID to cancel: ";
-        cin >> reservationID;
-        cancelReservation(reservationID);
+        cancelReservation(0); // Example reservation ID
         break;
     }
     case StudentOptions::RECENT_TRANSACTIONS:
     {
-        cout << "Viewing recent transactions..." << endl;
-        // Placeholder logic for viewing recent transactions
-        // You can integrate this with the Transaction class
+        viewRecentTransactions();
         break;
     }
     case StudentOptions::VIEW_RESERVATIONS:
     {
-        cout << "Viewing reservations..." << endl;
         viewReservations();
         break;
     }
     case StudentOptions::CHECK_BALANCE:
     {
-        cout << "Checking balance..." << endl;
         checkBalance();
         break;
     }
     case StudentOptions::EXIT:
     {
-        cout << "Exiting the panel..." << endl;
+        exit();
         break;
     }
     default:
     {
-        cout << "Invalid option selected!" << endl;
+        defaultOption();
         break;
     }
     }
@@ -185,4 +166,18 @@ void Panel::viewRecentTransactions()
     /*
         showing the recent transactions
     */
+}
+
+void Panel::exit()
+{
+    /*
+        showing the recent transactions
+    */
+}
+
+void Panel::defaultOption()
+{
+    system("clear");
+    cout << "Invalid option selected!" << endl;
+    // sleep function
 }
