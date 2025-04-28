@@ -1,6 +1,6 @@
+#include "include/Reservation.hpp"
 #include "include/User.hpp"
 #include "include/Meal.hpp"
-#include "include/Reservation.hpp"
 #include "include/DiningHall.hpp"
 
 #include <iostream>

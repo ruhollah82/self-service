@@ -3,6 +3,7 @@
 
 #include "Meal.hpp"
 #include "DiningHall.hpp"
+
 enum class RStatus
 {
     SUCCESS,
@@ -11,20 +12,18 @@ enum class RStatus
 };
 
 class Student;
-class Meal;
-class DiningHall;
 
 class Reservation
 {
 public:
     Reservation();
-    Reservation(int reservationID, const Student &student, const DiningHall &dHall, const Meal &meal, RStatus status, time_t createdAT);
+    Reservation(int reservationID, Student &student, const DiningHall &dHall, const Meal &meal, RStatus status, time_t createdAT);
 
 private:
     int _reservationID;
-    Student *_student;
-    DiningHall *_dHall;
-    Meal *_meal;
+    Student &_student;
+    DiningHall _dHall;
+    Meal _meal;
     RStatus _status;
     time_t _createdAT;
 };
