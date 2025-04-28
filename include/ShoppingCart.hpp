@@ -1,7 +1,7 @@
 #ifndef SHOPPINGCART_HPP
 #define SHOPPINGCART_HPP
 
-#include "User.hpp"
+#include "Student.hpp"
 #include "Reservation.hpp"
 #include <vector>
 
