@@ -50,3 +50,13 @@ void Reservation::setCreatedAt(time_t createdAT)
 {
     _createdAT = createdAT;
 }
+
+void Reservation::print() const
+{
+    cout << "Reservation ID: " << this->getReservationID() << endl;
+    cout << "Meal: " << this->getMeal().getName() << endl;
+    cout << "Dining Hall: " << this->getDiningHall().getName() << endl;
+    cout << "Status: " << (this->getStatus() == RStatus::SUCCESS ? "Success" : "Other") << endl;
+    cout << "Created At: " << this->getCreatedAT() << endl;
+    cout << "-----------------------------" << endl;
+}

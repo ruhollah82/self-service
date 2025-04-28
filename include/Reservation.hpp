@@ -31,6 +31,8 @@ public:
     void setStatus(RStatus status);
     void setCreatedAt(time_t createdAT);
 
+    void print() const;
+
 private:
     int _reservationID;
     Student *_student; // Change reference to pointer

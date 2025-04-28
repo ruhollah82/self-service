@@ -38,12 +38,7 @@ void Panel::viewReservations()
     cout << "Reservations:" << endl;
     for (const auto &reservation : _reservations)
     {
-        cout << "Reservation ID: " << reservation.getReservationID() << endl;
-        cout << "Meal: " << reservation.getMeal().getName() << endl;
-        cout << "Dining Hall: " << reservation.getDiningHall().getName() << endl;
-        cout << "Status: " << (reservation.getStatus() == RStatus::SUCCESS ? "Success" : "Other") << endl;
-        cout << "Created At: " << reservation.getCreatedAT() << endl;
-        cout << "-----------------------------" << endl;
+        reservation.print();
     }
 }
 
