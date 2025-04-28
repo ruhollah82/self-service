@@ -4,10 +4,12 @@
 #include <string> // Include necessary headers here
 #include <vector>
 #include "Meal.hpp"
+#include "Reservation.hpp"
+
 using namespace std;
 
-class Reservation;
 // Class definitions and declarations will go here
+class Reservation;
 class Student
 {
 public:

@@ -1,7 +1,6 @@
 #ifndef RESERVATION_HPP
 #define RESERVATION_HPP
 
-#include "User.hpp"
 #include "Meal.hpp"
 #include "DiningHall.hpp"
 enum class RStatus
@@ -11,6 +10,10 @@ enum class RStatus
     FAILED
 };
 
+class Student;
+class Meal;
+class DiningHall;
+
 class Reservation
 {
 public:
@@ -19,9 +22,9 @@ public:
 
 private:
     int _reservationID;
-    Student _student;
-    DiningHall _dHall;
-    Meal _meal;
+    Student *_student;
+    DiningHall *_dHall;
+    Meal *_meal;
     RStatus _status;
     time_t _createdAT;
 };
