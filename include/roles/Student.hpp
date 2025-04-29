@@ -1,10 +1,8 @@
 #ifndef STUDENT_HPP
 #define STUDENT_HPP
-
 #include "User.hpp"
+#include "../foodservice/Reservation.hpp"
 #include <vector>
-#include "Meal.hpp"
-#include "Reservation.hpp"
 
 using namespace std;
 
@@ -21,10 +19,9 @@ public:
     void cancelReservation();
 
     // Override print method
-    void print() const override;
+    void print() const;
 
     // Getters
-    int getUserID() const { return _userID; }
     bool isActive() const { return _isActive; }
     string getStudentID() const { return _studentID; }
     string getEmail() const { return _email; }

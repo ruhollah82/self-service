@@ -1,8 +1,8 @@
-#include "include/Reservation.hpp"
-#include "include/Student.hpp"
-#include "include/Meal.hpp"
-#include "include/DiningHall.hpp"
-#include "include/Panel.hpp"
+#include "foodservice/Reservation.hpp"
+#include "roles/Student.hpp"
+#include "foodservice/Meal.hpp"
+#include "foodservice/DiningHall.hpp"
+#include "interface/Panel.hpp"
 
 #include <iostream>
 

@@ -1,22 +1,9 @@
 #ifndef TRANSACTION_H
 #define TRANSACTION_H
-
+#include "../utils/Utilities.hpp"
 #include <string>
 #include <ctime>
 using namespace std;
-
-enum class TransactionType
-{
-    Transfer,
-    Payment
-};
-
-enum class TransactionStatus
-{
-    Pending,
-    Completed,
-    Failed,
-};
 
 class Transaction
 {

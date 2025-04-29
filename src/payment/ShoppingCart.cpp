@@ -1,10 +1,10 @@
-#include "../include/ShoppingCart.hpp"
-#include "../include/Transaction.hpp"
+#include "payment/ShoppingCart.hpp"
+#include "payment/Transaction.hpp"
 #include <ctime>
 
 // Constructor
-ShoppingCart::ShoppingCart(int cartID, Student student)
-    : _cartID(cartID), _student(student) {}
+ShoppingCart::ShoppingCart(int cartID)
+    : _cartID(cartID) {}
 
 // Confirm checkout and return a Transaction object
 Transaction ShoppingCart::confirm()

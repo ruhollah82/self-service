@@ -1,18 +1,21 @@
-#include "../include/Panel.hpp"
-#include "../include/Storage.hpp"
-#include "../include/Utilities.hpp"
+#include "interface/Panel.hpp"
+#include "infrastructures/Storage.hpp"
+#include "utils/Utilities.hpp"
 #include <algorithm>
+#include <stdexcept>
 /*
 UTILITIEs should be added to program:
     - adding colorful printign functions
+OPTIONS
+    - should be loaded form files
 */
 
 vector<pair<string, StudentOptions>> Panel::_MenuOptions = {
     {"Reserve Meal", StudentOptions::RESERVE_MEAL},
     {"Confirm the Shopping Cart", StudentOptions::CONFIRM_SHOPPING_CART},
-    {"Remove Shopping Cart Item", StudentOptions::REMOVE_SHAPPING_CART_ITEM},
+    {"Remove Shopping Cart Item", StudentOptions::REMOVE_SHOPPING_CART_ITEM},
     {"Balance Increase", StudentOptions::BALANCE_INCREASE},
-    {"Cancelling Reservation", StudentOptions::CANLCELLING_RESERVATION},
+    {"Cancelling Reservation", StudentOptions::CANCELLING_RESERVATION},
     {"Recent Transactions", StudentOptions::RECENT_TRANSACTIONS},
     {"View Reservations", StudentOptions::VIEW_RESERVATIONS},
     {"Check Balance", StudentOptions::CHECK_BALANCE},
@@ -105,7 +108,7 @@ DiningHall Panel::_chooseDiningHall()
     return Storage::allDiningHalls[choice - 1];
 }
 // Constructor
-Panel::Panel(Student &student) : _student(student)
+Panel::Panel(Student &student) : _student(student), _shoppingCart(student.getID())
 {
 }
 
@@ -122,37 +125,42 @@ void Panel::showMenu()
     }
 }
 
+// ------------------------------------------------------------
+// ERROR WRONG RESERVATION --> panel::reservation != student.reservation
+// ------------------------------------------------------------
 // View all reservations
 void Panel::viewReservations()
 {
-    cout << "Reservations:" << endl;
-    for (const auto &reservation : _reservations)
-    {
-        reservation.print();
-    }
+    // cout << "Reservations:" << endl;
+    // for (const auto &reservation : _reservations)
+    // {
+    //     reservation.print();
+    // }
 }
 
 // Add a reservation
 void Panel::addReservation(const Reservation &reservation)
 {
-    _reservations.push_back(reservation);
-    cout << "Reservation added successfully!" << endl;
+    // _reservations.push_back(reservation);
+    // cout << "Reservation added successfully!" << endl;
 }
 
 // Cancel a reservation by ID
 void Panel::cancelReservation(int reservationID)
 {
-    for (auto it = _reservations.begin(); it != _reservations.end(); ++it)
-    {
-        if (it->getReservationID() == reservationID)
-        {
-            _reservations.erase(it);
-            cout << "Reservation cancelled successfully!" << endl;
-            return;
-        }
-    }
-    cout << "Reservation not found!" << endl;
+    // for (auto it = _reservations.begin(); it != _reservations.end(); ++it)
+    // {
+    //     if (it->getReservationID() == reservationID)
+    //     {
+    //         _reservations.erase(it);
+    //         cout << "Reservation cancelled successfully!" << endl;
+    //         return;
+    //     }
+    // }
+    // cout << "Reservation not found!" << endl;
 }
+
+// ------------------------------------------------------------
 
 // Check student balance
 void Panel::checkBalance()
@@ -185,7 +193,7 @@ void Panel::Action(int option)
         confirmShoppingCart();
         break;
     }
-    case StudentOptions::REMOVE_SHAPPING_CART_ITEM:
+    case StudentOptions::REMOVE_SHOPPING_CART_ITEM:
     {
         removeShoppingCartItem();
         break;
@@ -195,7 +203,7 @@ void Panel::Action(int option)
         increaseBalance(100.0f); // Example amount
         break;
     }
-    case StudentOptions::CANLCELLING_RESERVATION:
+    case StudentOptions::CANCELLING_RESERVATION:
     {
         cancelReservation(0); // Example reservation ID
         break;
@@ -234,9 +242,10 @@ void Panel::reserveMeal()
     ReserveDay reserveDay = _chooseDay();
     DiningHall diningHall = _chooseDiningHall();
     Meal meal = _chooseMeal(mealType, reserveDay);
-    cout << "Meal reserved successfully!" << endl;
-    // Add logic to reserve a meal
-    // Example: _reservations.push_back(reservation);
+    // TODO: MAKE THE RESERVATION ID AUTO INCREMENTED
+    Reservation reservation(0, this->_student, diningHall, meal, RStatus::NOT_PAID, time(nullptr));
+    this->_shoppingCart.addReservation(reservation);
+    cout << "Meal added to shopping cart successfully" << endl;
 }
 
 void Panel::confirmShoppingCart()
@@ -269,7 +278,7 @@ void Panel::exit()
 
 void Panel::defaultOption()
 {
-    system("clear");
+    // system("clear");
     cout << "Invalid option selected!" << endl;
     // sleep function
 }

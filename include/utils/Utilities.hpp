@@ -5,9 +5,9 @@ enum class StudentOptions
 {
     RESERVE_MEAL,
     CONFIRM_SHOPPING_CART,
-    REMOVE_SHAPPING_CART_ITEM,
+    REMOVE_SHOPPING_CART_ITEM,
     BALANCE_INCREASE,
-    CANLCELLING_RESERVATION,
+    CANCELLING_RESERVATION,
     RECENT_TRANSACTIONS,
     VIEW_RESERVATIONS,
     CHECK_BALANCE,
@@ -31,5 +31,24 @@ enum class MealType
     LUNCH,
     DINNER
 };
+enum class RStatus
+{
+    SUCCESS,
+    CANCELLED,
+    FAILED,
+    NOT_PAID
+};
 
+enum class TransactionType
+{
+    Transfer,
+    Payment
+};
+
+enum class TransactionStatus
+{
+    Pending,
+    Completed,
+    Failed,
+};
 #endif

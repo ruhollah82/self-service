@@ -1,10 +1,9 @@
 #ifndef PANEL_H
 #define PANEL_H
 
-#include "Student.hpp"
-#include "Reservation.hpp"
-#include "Meal.hpp"
-#include "Utilities.hpp"
+#include "../utils/Utilities.hpp"
+#include "../roles/Student.hpp"
+#include "../payment/ShoppingCart.hpp"
 #include <vector>
 #include <iostream>
 
@@ -35,11 +34,11 @@ private:
     Meal _chooseMeal(MealType, ReserveDay);
     DiningHall _chooseDiningHall();
     MealType _chooseMealType();
-    StudentOptions
-    _mapping(int);
+    StudentOptions _mapping(int);
     Student &_student;
+    // should be save in a file and load it from there too
     static vector<pair<string, StudentOptions>> _MenuOptions;
-    vector<Reservation> _reservations;
+    ShoppingCart _shoppingCart;
 };
 
 #endif // PANEL_H

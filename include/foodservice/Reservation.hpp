@@ -1,16 +1,8 @@
 #ifndef RESERVATION_HPP
 #define RESERVATION_HPP
-
-#include "Meal.hpp"
 #include "DiningHall.hpp"
-
-enum class RStatus
-{
-    SUCCESS,
-    CANCELLED,
-    FAILED
-};
-
+#include "Meal.hpp"
+#include "../utils/Utilities.hpp"
 class Student;
 
 class Reservation

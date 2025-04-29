@@ -1,4 +1,4 @@
-#include "../include/Storage.hpp"
+#include "infrastructures/Storage.hpp"
 
 vector<Meal> Storage::allMeals = {};
 vector<DiningHall> Storage::allDiningHalls = {};

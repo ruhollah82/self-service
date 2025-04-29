@@ -1,22 +1,6 @@
-#include "../include/Meal.hpp"
-#include "../include/DiningHall.hpp"
+#include "foodservice/Meal.hpp"
 #include <iostream>
 using namespace std;
-
-// DiningHall -------------------------------------------------
-
-void DiningHall::print()
-{
-    cout << "Dining Hall Information:" << endl;
-    cout << "Hall ID: " << getHallID() << endl;
-    cout << "Name: " << getName() << endl;
-    cout << "Address: " << getAddress() << endl;
-    cout << "Capacity: " << getCapacity() << endl;
-}
-
-// ------------------------------------------------------------
-
-// Meal ------------------------------------------------------
 
 // Default constructor
 Meal::Meal()

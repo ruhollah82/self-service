@@ -1,6 +1,7 @@
-#include "../include/Reservation.hpp"
-#include "../include/Student.hpp"
+#include "foodservice/Reservation.hpp"
+#include <iostream>
 #include <ctime>
+using namespace std;
 
 // Default constructor
 Reservation::Reservation()

@@ -1,0 +1,2 @@
+جاهایی که time_t داریم رو با زمان سیستم درست کنیم
+addiing tests/ logs/ bin/ for *.out or *.bin  and config/

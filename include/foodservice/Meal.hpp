@@ -1,7 +1,7 @@
 #ifndef MEAL_HPP
 #define MEAL_HPP
-#include "DiningHall.hpp"
-#include "Utilities.hpp"
+#include "../utils/Utilities.hpp"
+#include <string>
 #include <vector>
 using namespace std;
 

@@ -1,18 +1,18 @@
 #ifndef SHOPPINGCART_HPP
 #define SHOPPINGCART_HPP
 
-#include "Student.hpp"
-#include "Reservation.hpp"
+#include "../roles/Student.hpp"
+#include "../foodservice/Reservation.hpp"
 #include <vector>
 
 using namespace std;
 
 class Transaction; // Forward declaration for Transaction class
-
+class Rervation;
 class ShoppingCart
 {
 public:
-    ShoppingCart(int cartID, Student student);
+    ShoppingCart(int cartID);
 
     // Methods
     Transaction confirm();
@@ -20,8 +20,7 @@ public:
     void removeReservation(const Reservation &reservation);
 
 private:
-    int _cartID;
-    Student _student;
+    int _cartID; // equal to user_id
     vector<Reservation> _reservations;
 };
 

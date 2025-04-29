@@ -1,8 +1,8 @@
 #ifndef STORAGE_HPP
 #define STORAGE_HPP
 
-#include "Meal.hpp"
-#include "DiningHall.hpp"
+#include "../foodservice/Meal.hpp"
+#include "../foodservice/DiningHall.hpp"
 #include <vector>
 
 // alternative ways :
