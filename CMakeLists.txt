@@ -14,6 +14,13 @@ file(GLOB_RECURSE SOURCES
     "src/roles/*.cpp"
     "main.cpp"
 )
+include(FetchContent)
+
+FetchContent_Declare(json 
+URL https://github.com/nlohmann/json/releases/download/v3.12.0/json.tar.xz
+DOWNLOAD_EXTRACT_TIMESTAMP true)
+FetchContent_MakeAvailable(json)
+
 
 # Include directories
 include_directories(include)
@@ -27,7 +34,7 @@ find_library(BCRYPT_LIBRARY
 # Executable
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME} ${BCRYPT_LIBRARY})
+target_link_libraries(${PROJECT_NAME} PRIVATE ${BCRYPT_LIBRARY} nlohmann_json::nlohmann_json)
 # Create directories for object files (optional, but good practice)
 set_target_properties(${PROJECT_NAME} PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}

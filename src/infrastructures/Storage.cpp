@@ -1,4 +1,5 @@
 #include "infrastructures/Storage.hpp"
+#include "nlohmann/json.hpp"
 
 vector<Meal> Storage::allMeals = {};
 vector<DiningHall> Storage::allDiningHalls = {};
