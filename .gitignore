@@ -1,4 +1,5 @@
 *.bin
 *.out
-/.vscode/
+.vscode/
 *.o
+build/
