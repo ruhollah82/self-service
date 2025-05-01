@@ -3,7 +3,8 @@
 
 vector<Meal> Storage::allMeals = {};
 vector<DiningHall> Storage::allDiningHalls = {};
-
+int Storage::_mealIDCounter = 0;
+int Storage::_diningHallIDCounter = 0;
 void Storage::initialize()
 {
     allMeals = {

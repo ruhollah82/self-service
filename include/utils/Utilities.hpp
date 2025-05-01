@@ -1,6 +1,8 @@
 #ifndef UTILITIES_H
 #define UTILITIES_H
 
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
 enum class StudentOptions
 {
     RESERVE_MEAL,
@@ -51,4 +53,48 @@ enum class TransactionStatus
     Completed,
     Failed,
 };
+
+NLOHMANN_JSON_SERIALIZE_ENUM(
+    MealType,
+    {
+        {MealType::BREAKFAST, "Breakfast"},
+        {MealType::LUNCH, "Lunch"},
+        {MealType::DINNER, "Dinner"},
+    })
+
+NLOHMANN_JSON_SERIALIZE_ENUM(ReserveDay,
+                             {
+                                 {ReserveDay::SAT, "Saturday"},
+                                 {ReserveDay::SUN, "Sunday"},
+                                 {ReserveDay::MON, "Monday"},
+                                 {ReserveDay::TUE, "Tuesday"},
+                                 {ReserveDay::WED, "Wednesday"},
+                                 {ReserveDay::THU, "Thursday"},
+                                 {ReserveDay::FRI, "Friday"},
+
+                             })
+
+NLOHMANN_JSON_SERIALIZE_ENUM(
+    RStatus,
+    {
+        {RStatus::SUCCESS, "Success"},
+        {RStatus::CANCELLED, "Cancelled"},
+        {RStatus::FAILED, "Failed"},
+        {RStatus::NOT_PAID, "Not Paid"},
+    })
+NLOHMANN_JSON_SERIALIZE_ENUM(
+    TransactionType,
+    {
+        {TransactionType::Transfer, "Transfer"},
+        {TransactionType::Payment, "Payment"},
+    })
+
+NLOHMANN_JSON_SERIALIZE_ENUM(
+    TransactionStatus,
+    {
+        {TransactionStatus::Pending, "Pending"},
+        {TransactionStatus::Completed, "Completed"},
+        {TransactionStatus::Failed, "Failed"},
+    })
+
 #endif

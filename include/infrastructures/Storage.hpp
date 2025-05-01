@@ -13,6 +13,11 @@
 
 class Storage
 {
+private:
+    Storage() {}; // Private constructor to prevent instantiation
+    static int _mealIDCounter;
+    static int _diningHallIDCounter;
+
 public:
     static vector<Meal> allMeals;
     static vector<DiningHall> allDiningHalls;

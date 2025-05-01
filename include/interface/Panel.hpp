@@ -37,7 +37,6 @@ private:
     StudentOptions _mapping(int);
     Student &_student;
     // should be save in a file and load it from there too
-    static vector<pair<string, StudentOptions>> _MenuOptions;
     ShoppingCart _shoppingCart;
 };
 

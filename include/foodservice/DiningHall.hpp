@@ -18,7 +18,7 @@ public:
     int getCapacity() const { return _capacity; }
 
     // Setters
-    // void setHallID(int hallID) { _hallID = hallID; }
+    void setHallID(int hallID) { _hallID = hallID; }
     void setName(string name) { _name = name; }
     void setAddress(string address) { _address = address; }
     void setCapacity(int capacity) { _capacity = capacity; }

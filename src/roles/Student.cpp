@@ -14,6 +14,7 @@ Student::Student(string studentID, string name, string lastName, string password
     this->setStudentID(studentID);
     this->setName(name);
     this->setLastName(lastName);
+    // TODO --> fix this to use the hash password;
     this->setHashedPassword(password);
 }
 

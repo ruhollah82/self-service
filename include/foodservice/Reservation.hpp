@@ -2,14 +2,16 @@
 #define RESERVATION_HPP
 #include "DiningHall.hpp"
 #include "Meal.hpp"
-#include "../utils/Utilities.hpp"
+#include "utils/Utilities.hpp"
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
 class Student;
 
 class Reservation
 {
 public:
     Reservation();
-    Reservation(int reservationID, Student &student, const DiningHall &dHall, const Meal &meal, RStatus status, time_t createdAT);
+    Reservation(int, Student &, DiningHall &, Meal &, RStatus, time_t);
 
     Meal getMeal() const;
     DiningHall getDiningHall() const;
@@ -17,20 +19,24 @@ public:
     time_t getCreatedAt() const;
     int getReservationID() const;
     time_t getCreatedAT() const;
+    Student &getStudent() const { return *_student; }
 
-    void setMeal(Meal meal);
-    void setDiningHall(DiningHall dHall);
+    void setReservationID(int id) { this->_reservationID = id; };
+    void setMeal(Meal &meal);
+    void setDiningHall(DiningHall &dHall);
     void setStatus(RStatus status);
     void setCreatedAt(time_t createdAT);
+    void setStudent(Student *student) { this->_student = student; };
 
     void print() const;
 
 private:
     int _reservationID;
     Student *_student; // Change reference to pointer
-    DiningHall _dHall;
-    Meal _meal;
+    DiningHall *_dHall;
+    Meal *_meal;
     RStatus _status;
     time_t _createdAT;
 };
+
 #endif // RESERVATION_HPP

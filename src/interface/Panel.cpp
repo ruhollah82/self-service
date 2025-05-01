@@ -10,7 +10,7 @@ OPTIONS
     - should be loaded form files
 */
 
-vector<pair<string, StudentOptions>> Panel::_MenuOptions = {
+vector<pair<string, StudentOptions>> _menuOptions = {
     {"Reserve Meal", StudentOptions::RESERVE_MEAL},
     {"Confirm the Shopping Cart", StudentOptions::CONFIRM_SHOPPING_CART},
     {"Remove Shopping Cart Item", StudentOptions::REMOVE_SHOPPING_CART_ITEM},
@@ -119,9 +119,9 @@ void Panel::showStudentInfo()
 }
 void Panel::showMenu()
 {
-    for (int i = 0; i < Panel::_MenuOptions.size(); i++)
+    for (int i = 0; i < _menuOptions.size(); i++)
     {
-        cout << i + 1 << ". " << Panel::_MenuOptions[i].first << endl;
+        cout << i + 1 << ". " << _menuOptions[i].first << endl;
     }
 }
 
@@ -170,11 +170,11 @@ void Panel::checkBalance()
 
 StudentOptions Panel::_mapping(int option)
 {
-    if (option < 1 || option > _MenuOptions.size())
+    if (option < 1 || option > _menuOptions.size())
     {
         return StudentOptions::EXIT;
     }
-    return _MenuOptions[option - 1].second;
+    return _menuOptions[option - 1].second;
 }
 
 void Panel::Action(int option)
