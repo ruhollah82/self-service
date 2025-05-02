@@ -23,7 +23,7 @@ public:
     void reserveMeal();
     void confirmShoppingCart();
     void removeShoppingCartItem();
-    void increaseBalance(float amount);
+    void increaseBalance();
     void viewRecentTransactions();
     void cancelReservation(int reservationID);
     void exit();

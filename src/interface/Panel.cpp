@@ -255,18 +255,18 @@ void Panel::removeShoppingCartItem()
 {
 }
 
-void Panel::increaseBalance(float amount)
+void Panel::increaseBalance()
 {
-    /*
-        processing the payment gateway and creating the transaction fucntion
-    */
+    float amount;
+    cout << "Enter the amount you want to add : ";
+    cin >> amount;
+    _student.setBalance(_student.getBalance() + amount);
+    cout << "Balance updated!" << endl;
 }
 
 void Panel::viewRecentTransactions()
 {
-    /*
-        showing the recent transactions
-    */
+    cout << "Sharifi Ridi :)";
 }
 
 void Panel::exit()
