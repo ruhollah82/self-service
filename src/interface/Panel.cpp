@@ -250,6 +250,18 @@ void Panel::reserveMeal()
 
 void Panel::confirmShoppingCart()
 {
+    char choice;
+    cout << "Do you want to confirm ? Y/N";
+    cin >> choice;
+    if (choice == Y || choice == y)
+    {
+        // Payment logic
+        _shoppingCart.confirm();
+    }
+    else
+    {
+        return;
+    }
 }
 void Panel::removeShoppingCartItem()
 {
