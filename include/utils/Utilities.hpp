@@ -54,6 +54,19 @@ enum class TransactionStatus
     Failed,
 };
 
+enum class SessionStatus
+{
+    AUTHENTICATED,
+    ANONYMOUS
+};
+
+NLOHMANN_JSON_SERIALIZE_ENUM(
+    SessionStatus,
+    {
+        {SessionStatus::AUTHENTICATED, "authenticated"},
+        {SessionStatus::ANONYMOUS, "anonymous"},
+    })
+
 NLOHMANN_JSON_SERIALIZE_ENUM(
     MealType,
     {
@@ -62,17 +75,18 @@ NLOHMANN_JSON_SERIALIZE_ENUM(
         {MealType::DINNER, "Dinner"},
     })
 
-NLOHMANN_JSON_SERIALIZE_ENUM(ReserveDay,
-                             {
-                                 {ReserveDay::SAT, "Saturday"},
-                                 {ReserveDay::SUN, "Sunday"},
-                                 {ReserveDay::MON, "Monday"},
-                                 {ReserveDay::TUE, "Tuesday"},
-                                 {ReserveDay::WED, "Wednesday"},
-                                 {ReserveDay::THU, "Thursday"},
-                                 {ReserveDay::FRI, "Friday"},
+NLOHMANN_JSON_SERIALIZE_ENUM(
+    ReserveDay,
+    {
+        {ReserveDay::SAT, "Saturday"},
+        {ReserveDay::SUN, "Sunday"},
+        {ReserveDay::MON, "Monday"},
+        {ReserveDay::TUE, "Tuesday"},
+        {ReserveDay::WED, "Wednesday"},
+        {ReserveDay::THU, "Thursday"},
+        {ReserveDay::FRI, "Friday"},
 
-                             })
+    })
 
 NLOHMANN_JSON_SERIALIZE_ENUM(
     RStatus,
