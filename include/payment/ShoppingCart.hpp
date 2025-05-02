@@ -17,7 +17,8 @@ public:
     // Methods
     Transaction confirm();
     void addReservation(const Reservation &reservation);
-    void removeReservation(const Reservation &reservation);
+    void removeReservation(const int &ID);
+    void viewShoppingCartItems();
 
 private:
     int _cartID; // equal to user_id

@@ -200,7 +200,7 @@ void Panel::Action(int option)
     }
     case StudentOptions::BALANCE_INCREASE:
     {
-        increaseBalance(100.0f); // Example amount
+        increaseBalance(); // Example amount
         break;
     }
     case StudentOptions::CANCELLING_RESERVATION:
@@ -253,6 +253,12 @@ void Panel::confirmShoppingCart()
 }
 void Panel::removeShoppingCartItem()
 {
+    int ID;
+    cout << "Enter the reservation ID you Wanna remove : " << endl;
+    _shoppingCart.viewShoppingCartItems();
+    cin >> ID;
+    _shoppingCart.removeReservation(ID);
+    cout << "Item has been removed !" << endl;
 }
 
 void Panel::increaseBalance()

@@ -41,15 +41,24 @@ void ShoppingCart::addReservation(const Reservation &reservation)
 }
 
 // Remove a reservation from the shopping cart
-void ShoppingCart::removeReservation(const Reservation &reservation)
+void ShoppingCart::removeReservation(const int &ID)
 {
     for (auto it = _reservations.begin(); it != _reservations.end(); ++it)
     {
         // Assuming Reservation has an equality operator or a unique ID for comparison
-        if (it->getReservationID() == reservation.getReservationID())
+        // Ruhollah : Remove Reservation By getting ID not Reservation Object!!
+        if (it->getReservationID() == ID)
         {
             _reservations.erase(it);
             break;
         }
+    }
+}
+
+void ShoppingCart::viewShoppingCartItems()
+{
+    for (Reservation item : _reservations)
+    {
+        item.print();
     }
 }
