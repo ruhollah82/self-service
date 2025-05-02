@@ -256,7 +256,8 @@ void Panel::confirmShoppingCart()
     if (choice == Y || choice == y)
     {
         // Payment logic
-        _shoppingCart.confirm();
+        Transaction transaction = _shoppingCart.confirm();
+        _recentTransactions.push_back(transaction);
     }
     else
     {
@@ -273,18 +274,18 @@ void Panel::removeShoppingCartItem()
     cout << "Item has been removed !" << endl;
 }
 
-void Panel::increaseBalance()
+void Panel::increaseBalance(float amount)
 {
-    float amount;
-    cout << "Enter the amount you want to add : ";
-    cin >> amount;
     _student.setBalance(_student.getBalance() + amount);
     cout << "Balance updated!" << endl;
 }
 
 void Panel::viewRecentTransactions()
 {
-    cout << "Sharifi Ridi :)";
+    for (Transaction item : _recentTransactions)
+    {
+        item.print();
+    }
 }
 
 void Panel::exit()

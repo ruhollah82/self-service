@@ -31,6 +31,20 @@ public:
     void setType(TransactionType t) { _type = t; }
     void setStatus(TransactionStatus s) { _status = s; }
     void setCreatedAt(time_t ts) { _createdAt = ts; }
+
+    void print()
+    {
+        char timeBuffer[80];
+        struct tm *timeInfo = localtime(&_createdAt);
+        strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%d %H:%M:%S", timeInfo);
+
+        cout << "Transaction ID: " << _transactionId << endl;
+        cout << "Amount: $" << _amount << endl;
+        cout << "Type: " << to_string(_type) << endl;
+        cout << "Status: " << to_string(_status) << endl;
+        cout << "Created At: " << timeBuffer << endl;
+        cout << "------------------------ " << endl;
+    }
 };
 
 #endif

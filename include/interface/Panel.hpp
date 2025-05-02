@@ -23,7 +23,7 @@ public:
     void reserveMeal();
     void confirmShoppingCart();
     void removeShoppingCartItem();
-    void increaseBalance();
+    void increaseBalance(float amount);
     void viewRecentTransactions();
     void cancelReservation(int reservationID);
     void exit();
@@ -38,6 +38,7 @@ private:
     Student &_student;
     // should be save in a file and load it from there too
     ShoppingCart _shoppingCart;
+    vector<Transaction> _recentTransactions;
 };
 
 #endif // PANEL_H
