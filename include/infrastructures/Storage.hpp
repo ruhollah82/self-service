@@ -13,16 +13,24 @@
 
 class Storage
 {
-private:
-    Storage() {}; // Private constructor to prevent instantiation
-    static int _mealIDCounter;
-    static int _diningHallIDCounter;
-
 public:
-    static vector<Meal> allMeals;
-    static vector<DiningHall> allDiningHalls;
+    static Storage &instance()
+    {
+        static Storage _instance;
+        return _instance;
+    }
+    vector<Meal> allMeals;
+    vector<DiningHall> allDiningHalls;
 
-    static void initialize(); // Optional: To populate the vectors
+private:
+    Storage()
+    {
+        /*
+            initializing the values from files
+        */
+    } // Private constructor to prevent instantiation
+    int _mealIDCounter;
+    int _diningHallIDCounter;
 };
 
 #endif // STORAGE_HPP

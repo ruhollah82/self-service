@@ -5,13 +5,12 @@
 #include "utils/Utilities.hpp"
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
-class Student;
 
 class Reservation
 {
 public:
     Reservation();
-    Reservation(int, Student &, DiningHall &, Meal &, RStatus, time_t);
+    Reservation(int, DiningHall &, Meal &, RStatus, time_t);
 
     Meal getMeal() const;
     DiningHall getDiningHall() const;
@@ -19,20 +18,20 @@ public:
     time_t getCreatedAt() const;
     int getReservationID() const;
     time_t getCreatedAT() const;
-    Student &getStudent() const { return *_student; }
+    // Student &getStudent() const { return *_student; }
 
     void setReservationID(int id) { this->_reservationID = id; };
     void setMeal(Meal &meal);
     void setDiningHall(DiningHall &dHall);
     void setStatus(RStatus status);
     void setCreatedAt(time_t createdAT);
-    void setStudent(Student *student) { this->_student = student; };
+    // void setStudent(Student *student) { this->_student = student; };
 
     void print() const;
 
 private:
     int _reservationID;
-    Student *_student; // Change reference to pointer
+    // Student *_student; // Change reference to pointer
     DiningHall *_dHall;
     Meal *_meal;
     RStatus _status;

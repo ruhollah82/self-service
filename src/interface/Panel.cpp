@@ -73,7 +73,7 @@ Meal Panel::_chooseMeal(MealType mealType, ReserveDay reserveDay)
 {
     vector<Meal> feasible_meals;
 
-    std::copy_if(Storage::allMeals.begin(), Storage::allMeals.end(), std::back_inserter(feasible_meals), [&](const Meal &meal)
+    std::copy_if(Storage::instance().allMeals.begin(), Storage::instance().allMeals.end(), std::back_inserter(feasible_meals), [&](const Meal &meal)
                  { return meal.getMealType() == mealType && meal.isActive() && meal.getReserveDay() == reserveDay; });
 
     cout << "Choose a meal:" << endl;
@@ -94,18 +94,18 @@ Meal Panel::_chooseMeal(MealType mealType, ReserveDay reserveDay)
 DiningHall Panel::_chooseDiningHall()
 {
     cout << "Choose a dining hall:" << endl;
-    for (int i = 0; i < Storage::allDiningHalls.size(); i++)
+    for (int i = 0; i < Storage::instance().allDiningHalls.size(); i++)
     {
-        cout << i + 1 << ". " << Storage::allDiningHalls[i].getName() << endl;
+        cout << i + 1 << ". " << Storage::instance().allDiningHalls[i].getName() << endl;
     }
     int choice;
     cin >> choice;
-    if (choice < 1 || choice > Storage::allDiningHalls.size())
+    if (choice < 1 || choice > Storage::instance().allDiningHalls.size())
     {
         cout << "Invalid choice. Please try again." << endl;
         throw invalid_argument("Invalid choice");
     }
-    return Storage::allDiningHalls[choice - 1];
+    return Storage::instance().allDiningHalls[choice - 1];
 }
 // Constructor
 Panel::Panel(Student &student) : _student(student), _shoppingCart(student.getID())
@@ -243,7 +243,7 @@ void Panel::reserveMeal()
     DiningHall diningHall = _chooseDiningHall();
     Meal meal = _chooseMeal(mealType, reserveDay);
     // TODO: MAKE THE RESERVATION ID AUTO INCREMENTED
-    Reservation reservation(0, this->_student, diningHall, meal, RStatus::NOT_PAID, time(nullptr));
+    Reservation reservation(0, diningHall, meal, RStatus::NOT_PAID, time(nullptr));
     this->_shoppingCart.addReservation(reservation);
     cout << "Meal added to shopping cart successfully" << endl;
 }

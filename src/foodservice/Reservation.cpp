@@ -5,12 +5,12 @@ using namespace std;
 
 // Default constructor
 Reservation::Reservation()
-    : _reservationID(0), _student(nullptr), _dHall(), _meal(), _status(RStatus::FAILED), _createdAT(time(nullptr))
+    : _reservationID(0), _dHall(), _meal(), _status(RStatus::FAILED), _createdAT(time(nullptr))
 {
 }
 
-Reservation::Reservation(int reservationID, Student &student, DiningHall &dHall, Meal &meal, RStatus status, time_t createdAT)
-    : _reservationID(reservationID), _student(&student), _dHall(&dHall), _meal(&meal), _status(status), _createdAT(createdAT)
+Reservation::Reservation(int reservationID, DiningHall &dHall, Meal &meal, RStatus status, time_t createdAT)
+    : _reservationID(reservationID), _dHall(&dHall), _meal(&meal), _status(status), _createdAT(createdAT)
 {
 }
 
