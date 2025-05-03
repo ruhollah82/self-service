@@ -4,7 +4,7 @@
 #include "foodservice/DiningHall.hpp"
 #include "interface/Panel.hpp"
 #include "utils/Utilities.hpp"
-#include "foodservice/RervationJsonSerialized.hpp"
+#include "foodservice/ReservationJsonSerialized.hpp"
 #include "auth/SessionManager.hpp"
 #include "nlohmann/json.hpp"
 #include <iostream>
