@@ -1,6 +1,7 @@
 #include "interface/Panel.hpp"
 #include "infrastructures/Storage.hpp"
 #include "utils/Utilities.hpp"
+#include "payment/Transaction.hpp"
 #include <algorithm>
 #include <stdexcept>
 /*
@@ -250,6 +251,19 @@ void Panel::reserveMeal()
 
 void Panel::confirmShoppingCart()
 {
+    char choice;
+    cout << "Do you want to confirm ? Y/N";
+    cin >> choice;
+    if (choice == 'Y' || choice == 'y')
+    {
+        // Payment logic
+        Transaction transaction = _shoppingCart.confirm();
+        _recentTransactions.push_back(transaction);
+    }
+    else
+    {
+        return;
+    }
 }
 void Panel::removeShoppingCartItem()
 {
@@ -264,7 +278,7 @@ void Panel::removeShoppingCartItem()
 void Panel::increaseBalance()
 {
     float amount;
-    cout << "Enter the amount you want to add : ";
+    cout << "Enter amount : " << endl;
     cin >> amount;
     _student.setBalance(_student.getBalance() + amount);
     cout << "Balance updated!" << endl;
@@ -272,7 +286,10 @@ void Panel::increaseBalance()
 
 void Panel::viewRecentTransactions()
 {
-    cout << "Sharifi Ridi :)";
+    for (Transaction item : _recentTransactions)
+    {
+        item.print();
+    }
 }
 
 void Panel::exit()

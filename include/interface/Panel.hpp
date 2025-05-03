@@ -38,6 +38,7 @@ private:
     Student &_student;
     // should be save in a file and load it from there too
     ShoppingCart _shoppingCart;
+    vector<Transaction> _recentTransactions;
 };
 
 #endif // PANEL_H

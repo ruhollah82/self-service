@@ -1,8 +1,8 @@
 #ifndef SHOPPINGCART_HPP
 #define SHOPPINGCART_HPP
 
-#include "../roles/Student.hpp"
-#include "../foodservice/Reservation.hpp"
+#include "roles/Student.hpp"
+#include "foodservice/Reservation.hpp"
 #include <vector>
 
 using namespace std;
