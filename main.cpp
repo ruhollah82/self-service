@@ -4,7 +4,7 @@
 #include "foodservice/DiningHall.hpp"
 #include "interface/Panel.hpp"
 #include "utils/Utilities.hpp"
-#include "foodservice/RervationJsonSerialized.hpp"
+#include "foodservice/ReservationJsonSerialized.hpp"
 #include "auth/SessionManager.hpp"
 #include "nlohmann/json.hpp"
 #include <iostream>
@@ -16,11 +16,13 @@ using json = nlohmann::json;
 
 int main()
 {
-    Reservation reserve(0, SessionManager::instace().currentStudent(), *(new DiningHall()), *(new Meal()), RStatus::NOT_PAID, time(nullptr));
-    vector<Meal>
-        mealList = {Meal(), Meal()};
+    // Reservation reserve(0, SessionManager::instace().currentStudent(), *(new DiningHall()), *(new Meal()), RStatus::NOT_PAID, time(nullptr));
+    // vector<Meal>
+    //     mealList = {Meal(), Meal()};
+    // Student st("4011226319", "alireza", "sharifi", "12345");
+    vector<Student> list = {Student("4011226319", "alireza", "sharifi", "12345"), Student("4011226319", "alireza", "sharifi", "12345")};
     ofstream file("data.json", ios::out);
-    json j = reserve;
+    json j = list;
     file << j;
     // json j = json::parse(file);
     // j.get_to(mealList);

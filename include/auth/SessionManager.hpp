@@ -1,21 +1,27 @@
-#pragma once
-#include "roles/Student.hpp"
+
+#ifndef SESSION_MANAGER_H
+#define SESSION_MANAGER_H
+
+// Forward declaration to avoid circular dependency
+class Student;
+
 #include "utils/Utilities.hpp"
 #include <filesystem>
+#include <unordered_map>
 namespace fs = std::filesystem;
 
 class SessionManager
 {
 public:
-    static SessionManager &instace()
+    static SessionManager &instance()
     {
         static SessionManager instace;
         return instace;
     }
 
-    Student &currentStudent() const
+    Student *currentStudent()
     {
-        return *_currentStudent;
+        return this->_currentStudent;
     }
 
     void login();
@@ -28,15 +34,7 @@ public:
     time_t getCreatedAT() const { return _created_at; }
     time_t getLastLogin() const { return _lasttime_login; }
     SessionStatus getStatus() const { return _status; };
-    void setLastLogin(time_t now)
-    {
-        if (_lasttime_login == 0 || _lasttime_login < now)
-        {
-            this->_lasttime_login = now;
-        }
-        else
-            throw invalid_argument("Wrong value! to set as LastLogin time! :(");
-    }
+    void setLastLogin(time_t now);
     void setStatus(SessionStatus status)
     {
         this->_status = status;
@@ -47,12 +45,9 @@ private:
     int _student_id;
     time_t _created_at = 0;
     time_t _lasttime_login = 0;
-    int _expire_lifetime_min = 60;
     SessionStatus _status = SessionStatus::ANONYMOUS;
-    SessionManager()
-    {
-        _currentStudent = new Student("4011226319", "Alireza", "Sharifi", "123456789");
-    }
+    SessionManager();
     SessionManager(const SessionManager &) = delete;
     SessionManager &operator=(const SessionManager &) = delete;
 };
+#endif

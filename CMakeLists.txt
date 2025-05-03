@@ -12,6 +12,8 @@ file(GLOB_RECURSE SOURCES
     "src/interface/*.cpp"
     "src/payment/*.cpp"
     "src/roles/*.cpp"
+    "src/config/*.cpp"
+    "src/auth/*.cpp"
     "main.cpp"
 )
 include(FetchContent)
