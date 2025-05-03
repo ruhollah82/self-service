@@ -1,11 +1,7 @@
 #include "roles/Student.hpp"
-#include <bcrypt/BCrypt.hpp>
 #include <iostream>
 
 using namespace std;
-
-// Default constructor
-// Student::Student() : User() {}
 
 // Parameterized constructor
 
@@ -16,16 +12,6 @@ Student::Student(string studentID, string name, string lastName, string password
     this->setLastName(lastName);
     // TODO --> fix this to use the hash password;
     this->setHashedPassword(password);
-}
-
-bool Student::checkPassword(string password)
-{
-    return BCrypt::validatePassword(password, this->_hashedPassword);
-}
-
-void Student::setHashedPassword(string password)
-{
-    this->_hashedPassword = BCrypt::generateHash(password);
 }
 
 // Student-specific methods

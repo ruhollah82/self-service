@@ -47,10 +47,6 @@ public:
     void activate() { _isActive = true; }
     void deactivate() { _isActive = false; }
 
-    // Other member functions
-    bool checkPassword(string password);
-    void setHashedPassword(string password);
-
 private:
     string _studentID;
     string _email;

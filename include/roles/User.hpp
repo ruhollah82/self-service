@@ -36,7 +36,10 @@ public:
     void setID(int id) { _userID = id; }
     void setName(string name) { _name = name; }
     void setLastName(string lastName) { _lastName = lastName; }
-    void setHashedPassword(string hashedPassword) { _hashedPassword = hashedPassword; }
+    void setPassword(string password);
+    // Other member functions
+    bool checkPassword(string password);
+    void setHashedPassword(string);
 
 private:
     static int _staticUserID;

@@ -7,7 +7,6 @@ class Student;
 
 #include "utils/Utilities.hpp"
 #include <filesystem>
-#include <unordered_map>
 namespace fs = std::filesystem;
 
 class SessionManager
