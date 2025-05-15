@@ -2,10 +2,6 @@
 #include "payment/Transaction.hpp"
 #include <ctime>
 
-// Constructor
-ShoppingCart::ShoppingCart(int cartID)
-    : _cartID(cartID) {}
-
 // Confirm checkout and return a Transaction object
 Transaction ShoppingCart::confirm()
 {
@@ -21,7 +17,8 @@ Transaction ShoppingCart::confirm()
 
     // Create a Transaction object
     Transaction transaction(
-        _cartID, // Using cart ID as transaction ID for simplicity
+        0,           // TODO: the transaction id should be auto increment
+        "something", // TODO: should be changed later
         totalAmount,
         TransactionType::Payment,
         TransactionStatus::Completed,

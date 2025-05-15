@@ -40,9 +40,6 @@ public:
     // Other member functions
     bool checkPassword(string password);
     void setHashedPassword(string);
-
-private:
-    static int _staticUserID;
 };
 
 #endif // USER_HPP

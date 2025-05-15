@@ -1,13 +1,13 @@
 #include "config/AppConfig.hpp"
 #include "roles/Student.hpp"
 
-fs::path AppConfig::d_student(Student *st)
+fs::path config::AppConfig::d_student(Student *st)
 {
     if (!st)
     {
-        if (SessionManager::instance().getStatus() == SessionStatus::AUTHENTICATED)
+        if (StudentSession::SessionManager::instance().getStatus() == SessionStatus::AUTHENTICATED)
         {
-            return (d_students / SessionManager::instance().currentStudent()->getStudentID());
+            return (d_students / StudentSession::SessionManager::instance().currentStudent()->getStudentID());
         }
         else
             throw runtime_error("Student is not Authenticated to obtain it's Dir! :(");
@@ -18,11 +18,11 @@ fs::path AppConfig::d_student(Student *st)
     }
 }
 
-fs::path AppConfig::j_reservations(Student *st)
+fs::path config::AppConfig::j_reservations(Student *st)
 {
     if (!st)
     {
-        if (SessionManager::instance().getStatus() == SessionStatus::AUTHENTICATED)
+        if (StudentSession::SessionManager::instance().getStatus() == SessionStatus::AUTHENTICATED)
         {
             return (d_student() / "reservations.json");
         }
@@ -35,8 +35,7 @@ fs::path AppConfig::j_reservations(Student *st)
     }
 }
 
-fs::path AppConfig::j_student_info(Student *st)
-
+fs::path config::AppConfig::j_student_info(Student *st)
 {
     if (!st)
         return d_student() / "info.json";

@@ -107,10 +107,10 @@ DiningHall Panel::_chooseDiningHall()
     }
     return Storage::instance().allDiningHalls[choice - 1];
 }
-// Constructor
-Panel::Panel(Student &student) : _student(student), _shoppingCart(student.getID())
-{
-}
+// // Constructor
+// Panel::Panel(Student &student) : _student(student), _shoppingCart(student.getID())
+// {
+// }
 
 // Show student information
 void Panel::showStudentInfo()

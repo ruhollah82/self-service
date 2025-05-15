@@ -7,29 +7,18 @@
 #include "foodservice/ReservationJsonSerialized.hpp"
 #include "auth/SessionManager.hpp"
 #include "nlohmann/json.hpp"
+#include "config/AppConfig.hpp"
 #include <iostream>
 #include <fstream>
+#include "filesystem"
 #include <vector>
 
 using namespace std;
 using json = nlohmann::json;
+namespace fs = std::filesystem;
 
 int main()
 {
-    // Reservation reserve(0, SessionManager::instace().currentStudent(), *(new DiningHall()), *(new Meal()), RStatus::NOT_PAID, time(nullptr));
-    // vector<Meal>
-    //     mealList = {Meal(), Meal()};
-    // Student st("4011226319", "alireza", "sharifi", "12345");
-    vector<Student> list = {Student("4011226319", "alireza", "sharifi", "12345"), Student("4011226319", "alireza", "sharifi", "12345")};
-    ofstream file("data.json", ios::out);
-    json j = list;
-    file << j;
-    // json j = json::parse(file);
-    // j.get_to(mealList);
-    // for (auto &meal : mealList)
-    // {
-    //     meal.print();
-    // }
-    file.close();
+    // checking if Admin directory exists
     return 0;
 }

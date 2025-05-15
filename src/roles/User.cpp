@@ -1,11 +1,11 @@
 #include "roles/User.hpp"
 #include <bcrypt/BCrypt.hpp>
 #include "iostream"
+#include "config/UsersConfig.hpp"
 
 // User -------------------------------------------------------
-int User::_staticUserID = 0;
 
-User::User() : _userID(++_staticUserID), _name(""), _lastName(""), _hashedPassword("") {}
+User::User() : _userID(config::UserConfig::instance().getLastIDandIncrease()), _name(""), _lastName(""), _hashedPassword("") {}
 
 User::User(string name, string lastName, string hashedPassword) : _name(name), _lastName(lastName), _hashedPassword(hashedPassword) {}
 
