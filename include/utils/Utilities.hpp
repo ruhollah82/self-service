@@ -13,7 +13,22 @@ enum class StudentOptions
     RECENT_TRANSACTIONS,
     VIEW_RESERVATIONS,
     CHECK_BALANCE,
-    EXIT
+    EXIT,
+    NONE
+};
+
+enum class AdminOptions
+{
+    CHOOSE_CSV_FILE,
+    DISPLAY_ALL_MEALS,
+    DISPLAY_ALL_DINNINGHALLS,
+    ADD_MEALS,
+    ADD_DINNINGHALL,
+    REMOVE_MEALS,
+    REMOVE_DINNINGHALL,
+    MEAL_ACTIVATION,
+    EXIT,
+    NONE,
 };
 
 enum class ReserveDay

@@ -13,8 +13,10 @@ file(GLOB_RECURSE SOURCES
     "src/payment/*.cpp"
     "src/roles/*.cpp"
     "src/config/*.cpp"
-    "src/config/AppConfig.cpp"
     "src/auth/*.cpp"
+    "src/utils/StringUtils.cpp"
+    "src/auth/StudentSessionManager.cpp"
+    "src/foodservice/Filling.cpp"
     "main.cpp"
 )
 include(FetchContent)

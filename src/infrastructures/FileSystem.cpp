@@ -1,5 +1,7 @@
 #include "infrastructures/FileSystem.hpp"
 #include <iostream>
+#include <fstream>
+using namespace std;
 
 bool FileSystem::exists(fs::path path)
 {
@@ -49,26 +51,35 @@ bool FileSystem::isEmpty(fs::path path)
     }
 }
 
-void FileSystem::ifNotExistsCreate(fs::path path)
+bool FileSystem::ifNotExistsCreate(fs::path path)
 {
     std::error_code ec;
     bool exists = false;
     try
     {
-        exists = this->exists(path);
+        exists = FileSystem::exists(path);
     }
     catch (std::exception &e)
     {
         std::cerr << e.what();
+        return false;
     }
 
     if (!exists)
     {
+        bool file = false;
+        fs::path pPath = path;
         if (isFile(path))
         {
-            path = path.parent_path();
+            file = true;
+            pPath = path.parent_path();
         }
-        fs::create_directory(path);
-        std::cout << path.c_str() << " is created successfully :)";
+        fs::create_directories(pPath);
+        if (file)
+        {
+            ofstream(path);
+        }
+        return true;
     } // else nothting
+    return true;
 }

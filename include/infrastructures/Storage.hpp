@@ -1,8 +1,8 @@
 #ifndef STORAGE_HPP
 #define STORAGE_HPP
 
-#include "../foodservice/Meal.hpp"
-#include "../foodservice/DiningHall.hpp"
+#include "foodservice/Meal.hpp"
+#include "foodservice/DiningHall.hpp"
 #include <vector>
 
 // alternative ways :
@@ -20,15 +20,17 @@ public:
         return _instance;
     }
     vector<Meal> allMeals;
-    vector<DiningHall> allDiningHalls;
+    void addMeal(Meal);
+    void addDinningHall(DinningHall);
+    void removeMeal(int);
+    void removeDinningHall(int);
+    void MealActivation(int, bool);
+    vector<Meal>::iterator findMeal(int);
+    vector<DinningHall>::iterator findDiningHall(int);
+    vector<DinningHall> allDiningHalls;
 
 private:
-    Storage()
-    {
-        /*
-            initializing the values from files
-        */
-    } // Private constructor to prevent instantiation
+    Storage();
     int _mealIDCounter;
     int _diningHallIDCounter;
 };

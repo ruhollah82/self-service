@@ -1,13 +1,18 @@
 #include "interface/Panel.hpp"
 #include "infrastructures/Storage.hpp"
 #include "utils/Utilities.hpp"
+#include "auth/SessionManager.hpp"
+#include "roles/Student.hpp"
+#include "foodservice/Meal.hpp"
+#include "foodservice/DiningHall.hpp"
+#include "foodservice/Reservation.hpp"
 #include <algorithm>
 #include <stdexcept>
 /*
 UTILITIEs should be added to program:
-    - adding colorful printign functions
+    - adding colorful printing functions
 OPTIONS
-    - should be loaded form files
+    - should be loaded form files -- i didn't found a simple way to do this
 */
 
 vector<pair<string, StudentOptions>> _menuOptions = {
@@ -19,7 +24,8 @@ vector<pair<string, StudentOptions>> _menuOptions = {
     {"Recent Transactions", StudentOptions::RECENT_TRANSACTIONS},
     {"View Reservations", StudentOptions::VIEW_RESERVATIONS},
     {"Check Balance", StudentOptions::CHECK_BALANCE},
-    {"Exit", StudentOptions::EXIT}};
+    {"Exit", StudentOptions::EXIT},
+};
 
 vector<pair<string, ReserveDay>> weekDays = {
     {"Sat", ReserveDay::SAT},
@@ -35,7 +41,7 @@ vector<pair<string, MealType>> mealTypes = {
     {"Lunch", MealType::LUNCH},
     {"Dinner", MealType::DINNER}};
 
-MealType Panel::_chooseMealType()
+MealType student_namespace::Panel::_chooseMealType()
 {
     cout << "Choose a meal type:" << endl;
     for (int i = 0; i < mealTypes.size(); i++)
@@ -52,7 +58,7 @@ MealType Panel::_chooseMealType()
     return mealTypes[choice - 1].second;
 }
 
-ReserveDay Panel::_chooseDay()
+ReserveDay student_namespace::Panel::_chooseDay()
 {
     cout << "Choose a day for reservation:" << endl;
     for (int i = 0; i < weekDays.size(); i++)
@@ -69,7 +75,7 @@ ReserveDay Panel::_chooseDay()
     return weekDays[choice - 1].second;
 }
 
-Meal Panel::_chooseMeal(MealType mealType, ReserveDay reserveDay)
+Meal student_namespace::Panel::_chooseMeal(MealType mealType, ReserveDay reserveDay)
 {
     vector<Meal> feasible_meals;
 
@@ -91,7 +97,7 @@ Meal Panel::_chooseMeal(MealType mealType, ReserveDay reserveDay)
     return feasible_meals[choice - 1];
 }
 
-DiningHall Panel::_chooseDiningHall()
+DinningHall student_namespace::Panel::_chooseDiningHall()
 {
     cout << "Choose a dining hall:" << endl;
     for (int i = 0; i < Storage::instance().allDiningHalls.size(); i++)
@@ -107,17 +113,12 @@ DiningHall Panel::_chooseDiningHall()
     }
     return Storage::instance().allDiningHalls[choice - 1];
 }
-// // Constructor
-// Panel::Panel(Student &student) : _student(student), _shoppingCart(student.getID())
-// {
-// }
 
-// Show student information
-void Panel::showStudentInfo()
+void student_namespace::Panel::showStudentInfo()
 {
-    _student.print();
+    student_namespace::SessionManager::instance().currentStudent()->print();
 }
-void Panel::showMenu()
+void student_namespace::Panel::showMenu()
 {
     for (int i = 0; i < _menuOptions.size(); i++)
     {
@@ -125,28 +126,21 @@ void Panel::showMenu()
     }
 }
 
-// ------------------------------------------------------------
-// ERROR WRONG RESERVATION --> panel::reservation != student.reservation
-// ------------------------------------------------------------
-// View all reservations
-void Panel::viewReservations()
+void student_namespace::Panel::viewReservations()
 {
-    // cout << "Reservations:" << endl;
-    // for (const auto &reservation : _reservations)
-    // {
-    //     reservation.print();
-    // }
+    for (auto item : student_namespace::SessionManager::instance().currentStudent()->getReserves())
+    {
+        item.print(); // item is a reservation obj
+    }
 }
 
-// Add a reservation
-void Panel::addReservation(const Reservation &reservation)
+// TODO : Reservation should be added to Session Shoppingcart
+void student_namespace::Panel::addReservation(const Reservation &reservation)
 {
-    // _reservations.push_back(reservation);
-    // cout << "Reservation added successfully!" << endl;
 }
 
-// Cancel a reservation by ID
-void Panel::cancelReservation(int reservationID)
+// NOT YET , AT THE END
+void student_namespace::Panel::cancelReservation(int reservationID)
 {
     // for (auto it = _reservations.begin(); it != _reservations.end(); ++it)
     // {
@@ -163,21 +157,21 @@ void Panel::cancelReservation(int reservationID)
 // ------------------------------------------------------------
 
 // Check student balance
-void Panel::checkBalance()
+void student_namespace::Panel::checkBalance()
 {
-    cout << "Current Balance: " << _student.getBalance() << endl;
+    cout << "Current Balance is: " << student_namespace::SessionManager::instance().currentStudent()->getBalance() << endl;
 }
 
-StudentOptions Panel::_mapping(int option)
+StudentOptions student_namespace::Panel::_mapping(int option)
 {
     if (option < 1 || option > _menuOptions.size())
     {
-        return StudentOptions::EXIT;
+        return StudentOptions::NONE;
     }
     return _menuOptions[option - 1].second;
 }
 
-void Panel::Action(int option)
+void student_namespace::Panel::Action(int option)
 {
     // logics of each case statement should be wrapped in a separated funciton
     switch (_mapping(option))
@@ -236,53 +230,50 @@ void Panel::Action(int option)
     }
 }
 
-void Panel::reserveMeal()
+// TODO: SHOULD BE REMOVED AND CUSTOMIZE FOR addReservation
+void student_namespace::Panel::reserveMeal()
 {
     MealType mealType = _chooseMealType();
     ReserveDay reserveDay = _chooseDay();
-    DiningHall diningHall = _chooseDiningHall();
+    DinningHall diningHall = _chooseDiningHall();
     Meal meal = _chooseMeal(mealType, reserveDay);
     // TODO: MAKE THE RESERVATION ID AUTO INCREMENTED
-    Reservation reservation(0, diningHall, meal, RStatus::NOT_PAID, time(nullptr));
-    this->_shoppingCart.addReservation(reservation);
+    // Reservation reservation(0, diningHall, meal, RStatus::NOT_PAID, time(nullptr));
+    // this->_shoppingCart.addReservation(reservation);
     cout << "Meal added to shopping cart successfully" << endl;
 }
 
-void Panel::confirmShoppingCart()
+void student_namespace::Panel::confirmShoppingCart()
 {
 }
-void Panel::removeShoppingCartItem()
+void student_namespace::Panel::removeShoppingCartItem()
 {
-    int ID;
-    cout << "Enter the reservation ID you Wanna remove : " << endl;
-    _shoppingCart.viewShoppingCartItems();
-    cin >> ID;
-    _shoppingCart.removeReservation(ID);
-    cout << "Item has been removed !" << endl;
 }
 
-void Panel::increaseBalance()
+void student_namespace::Panel::increaseBalance()
 {
     float amount;
     cout << "Enter the amount you want to add : ";
     cin >> amount;
-    _student.setBalance(_student.getBalance() + amount);
+    student_namespace::SessionManager::instance().currentStudent()->setBalance(student_namespace::SessionManager::instance().currentStudent()->getBalance() + amount);
     cout << "Balance updated!" << endl;
 }
 
-void Panel::viewRecentTransactions()
+// NOT YET
+void student_namespace::Panel::viewRecentTransactions()
 {
     cout << "Sharifi Ridi :)";
 }
 
-void Panel::exit()
+void student_namespace::Panel::exit()
 {
     /*
         showing the recent transactions
     */
+    std::exit(0);
 }
 
-void Panel::defaultOption()
+void student_namespace::Panel::defaultOption()
 {
     // system("clear");
     cout << "Invalid option selected!" << endl;

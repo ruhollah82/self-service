@@ -3,7 +3,7 @@
 #include "User.hpp"
 #include "foodservice/Reservation.hpp"
 #include "foodservice/ReservationJsonSerialized.hpp"
-#include "config/AppConfig.hpp"
+#include "config/ConfigPaths.hpp"
 #include <nlohmann/json.hpp>
 #include <vector>
 using json = nlohmann::json;
@@ -16,7 +16,7 @@ class Student : public User
 {
 public:
     Student() : User(), _balance(0.0f), _isActive(false) {}
-    Student(string studentID, string name, string lastName, string password);
+    Student(int, string, string, string, string, string, string);
 
     // Student-specific methods
     void reserveMeal();

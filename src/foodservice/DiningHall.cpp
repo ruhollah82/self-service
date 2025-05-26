@@ -4,18 +4,18 @@
 using namespace std;
 using json = nlohmann::json;
 // Default constructor
-DiningHall::DiningHall()
+DinningHall::DinningHall()
     : _hallID(0), _name(""), _address(""), _capacity(0)
 {
 }
 
 // Parameterized constructor
-DiningHall::DiningHall(int hallID, string name, string address, int capacity)
+DinningHall::DinningHall(int hallID, string name, string address, int capacity)
     : _hallID(hallID), _name(name), _address(address), _capacity(capacity)
 {
 }
 
-void DiningHall::print()
+void DinningHall::print()
 {
     cout << "Dining Hall Information:" << endl;
     cout << "Hall ID: " << getHallID() << endl;
@@ -23,30 +23,18 @@ void DiningHall::print()
     cout << "Address: " << getAddress() << endl;
     cout << "Capacity: " << getCapacity() << endl;
 }
-
-namespace nlohmann
+void DinningHall::input()
 {
+    cout << "enter the name: ";
+    string name, address;
+    cin >> name;
+    cout << "enter the address: ";
+    cin >> address;
+    int cap;
+    cout << "enter the capacity: ";
+    cin >> cap;
 
-    template <>
-    struct adl_serializer<DiningHall>
-    {
-
-        static void to_json(json &j, DiningHall &diningHall)
-        {
-            j = json{
-                {"HallID", diningHall.getHallID()},
-                {"Name", diningHall.getName()},
-                {"Address", diningHall.getAddress()},
-                {"Capacity", diningHall.getCapacity()},
-            };
-        }
-
-        static void from_json(json &j, DiningHall &diningHall)
-        {
-            diningHall.setHallID(j.at("HallID").get<int>());
-            diningHall.setName(j.at("Name").get<string>());
-            diningHall.setAddress(j.at("Address").get<string>());
-            diningHall.setCapacity(j.at("Capacity").get<int>());
-        }
-    };
-};
+    this->setName(name);
+    this->setAddress(address);
+    this->setCapacity(cap);
+}

@@ -18,7 +18,7 @@ protected:
 
 public:
     User();
-    User(string name, string lastName, string hashedPassword);
+    User(int, string, string, string);
 
     // Virtual destructor for proper cleanup in derived classes
     virtual ~User() {}

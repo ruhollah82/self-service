@@ -1,13 +1,12 @@
 #include "roles/User.hpp"
 #include <bcrypt/BCrypt.hpp>
 #include "iostream"
-#include "config/UsersConfig.hpp"
 
 // User -------------------------------------------------------
 
-User::User() : _userID(config::UserConfig::instance().getLastIDandIncrease()), _name(""), _lastName(""), _hashedPassword("") {}
+User::User() : _userID(0), _name(""), _lastName(""), _hashedPassword("") {}
 
-User::User(string name, string lastName, string hashedPassword) : _name(name), _lastName(lastName), _hashedPassword(hashedPassword) {}
+User::User(int id, string name, string lastName, string hashedPassword) : _userID(id), _name(name), _lastName(lastName), _hashedPassword(hashedPassword) {}
 
 void User::print() const
 {

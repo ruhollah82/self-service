@@ -5,13 +5,14 @@ using namespace std;
 
 // Parameterized constructor
 
-Student::Student(string studentID, string name, string lastName, string password)
+Student::Student(int id, string studentID, string name, string lastName, string hash, string email, string phone)
+    : User(id, name, lastName, hash)
 {
     this->setStudentID(studentID);
-    this->setName(name);
-    this->setLastName(lastName);
-    // TODO --> fix this to use the hash password;
-    this->setHashedPassword(password);
+    this->setEmail(email);
+    this->setPhone(phone);
+    this->setBalance(0);
+    this->activate();
 }
 
 // Student-specific methods

@@ -2,6 +2,7 @@
 #include <nlohmann/json.hpp>
 #include <iostream>
 #include "foodservice/Meal.hpp"
+#include "infrastructures/Storage.hpp"
 using namespace std;
 using json = nlohmann::json;
 
@@ -12,8 +13,8 @@ Meal::Meal()
 }
 
 // Parameterized constructor
-Meal::Meal(string name, float price, vector<string> sideItems)
-    : _mealID(0), _reserveDay(ReserveDay::SAT), _name(name), _price(price), _isActive(true), _mealType(MealType::BREAKFAST), _sideItems(sideItems)
+Meal::Meal(int id, string name, float price, vector<string> sideItems)
+    : _mealID(id), _reserveDay(ReserveDay::SAT), _name(name), _price(price), _isActive(true), _mealType(MealType::BREAKFAST), _sideItems(sideItems)
 {
 }
 void Meal::print()
@@ -58,6 +59,18 @@ void Meal::addPrice(float value)
     }
     else
         throw invalid_argument("Value is too LOW! :(");
+}
+void Meal::input()
+{
+    string name;
+    int id;
+    float price;
+    cout << "enter the name: ";
+    getline(cin, name);
+    cout << "enter the price: ";
+    cin >> price;
+    this->setName(name);
+    this->setPrice(price);
 }
 
 // -----------------------------------------------------------

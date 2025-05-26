@@ -7,7 +7,7 @@ class Admin : public User
 {
 public:
     Admin();
-    Admin(string adminID, string name, string lastName, string password);
+    Admin(int id, string name, string lastName, string password);
 
     // Admin-specific methods
     void manageUsers();

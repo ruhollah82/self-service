@@ -7,8 +7,8 @@ using namespace std;
 Admin::Admin() : User() {}
 
 // Parameterized constructor
-Admin::Admin(string adminID, string name, string lastName, string password)
-    : User(name, lastName, password) {}
+Admin::Admin(int id, string name, string lastName, string password)
+    : User(id, name, lastName, password) {}
 
 // Admin-specific methods
 void Admin::manageUsers()

@@ -11,7 +11,7 @@ class Meal
 {
 public:
     Meal();
-    Meal(string name, float price, vector<string> sideItems);
+    Meal(int, string, float, vector<string>);
     ReserveDay getReserveDay() const { return _reserveDay; }
     // Getters
     int getMealID() const { return _mealID; }
@@ -35,6 +35,7 @@ public:
 
     // Other Methods
     void print();
+    void input();
     void addSideItem(string);
     void addPrice(float);
 

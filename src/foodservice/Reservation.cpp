@@ -9,7 +9,7 @@ Reservation::Reservation()
 {
 }
 
-Reservation::Reservation(int reservationID, DiningHall &dHall, Meal &meal, RStatus status, time_t createdAT)
+Reservation::Reservation(int reservationID, DinningHall &dHall, Meal &meal, RStatus status, time_t createdAT)
     : _reservationID(reservationID), _dHall(&dHall), _meal(&meal), _status(status), _createdAT(createdAT)
 {
 }
@@ -19,7 +19,7 @@ Meal Reservation::getMeal() const
     return *_meal;
 }
 
-DiningHall Reservation::getDiningHall() const
+DinningHall Reservation::getDiningHall() const
 {
     return *_dHall;
 }
@@ -39,7 +39,7 @@ void Reservation::setMeal(Meal &meal)
 {
     _meal = &meal;
 }
-void Reservation::setDiningHall(DiningHall &dHall)
+void Reservation::setDiningHall(DinningHall &dHall)
 {
     _dHall = &dHall;
 }
