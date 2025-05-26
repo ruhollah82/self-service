@@ -1,9 +1,11 @@
 #ifndef TRANSACTION_H
 #define TRANSACTION_H
 #include "../utils/Utilities.hpp"
+#include <nlohmann/json.hpp>
 #include <string>
 #include <ctime>
 using namespace std;
+using json = nlohmann::json;
 
 class Transaction
 {
@@ -33,6 +35,23 @@ public:
     void setStatus(TransactionStatus s) { _status = s; }
     void setCreatedAt(time_t ts) { _createdAt = ts; }
     void setTrackingCode(const string &tc) { this->_trackingCode = tc; }
+
+    void print()
+    {
+        char timeBuffer[80];
+        struct tm *timeInfo = localtime(&_createdAt);
+        strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%d %H:%M:%S", timeInfo);
+        json j = json{
+            {"type", _type},
+            {"status", _status},
+        };
+        cout << "Transaction ID: " << _transactionId << endl;
+        cout << "Amount: $" << _amount << endl;
+        cout << "Type: " << j["type"] << endl;
+        cout << "Status: " << j["status"] << endl;
+        cout << "Created At: " << timeBuffer << endl;
+        cout << "------------------------ " << endl;
+    }
 };
 
 #endif

@@ -6,6 +6,7 @@
 #include "foodservice/Meal.hpp"
 #include "foodservice/DiningHall.hpp"
 #include "foodservice/Reservation.hpp"
+#include "payment/Transaction.hpp"
 #include <algorithm>
 #include <stdexcept>
 /*
@@ -245,6 +246,19 @@ void student_namespace::Panel::reserveMeal()
 
 void student_namespace::Panel::confirmShoppingCart()
 {
+    char choice;
+    cout << "Do you want to confirm ? Y/N";
+    cin >> choice;
+    if (choice == 'Y' || choice == 'y')
+    {
+        // Payment logic
+        // Transaction transaction = _shoppingCart.confirm();
+        // _recentTransactions.push_back(transaction);
+    }
+    else
+    {
+        return;
+    }
 }
 void student_namespace::Panel::removeShoppingCartItem()
 {
@@ -253,7 +267,7 @@ void student_namespace::Panel::removeShoppingCartItem()
 void student_namespace::Panel::increaseBalance()
 {
     float amount;
-    cout << "Enter the amount you want to add : ";
+    cout << "Enter amount : " << endl;
     cin >> amount;
     student_namespace::SessionManager::instance().currentStudent()->setBalance(student_namespace::SessionManager::instance().currentStudent()->getBalance() + amount);
     cout << "Balance updated!" << endl;
@@ -262,7 +276,10 @@ void student_namespace::Panel::increaseBalance()
 // NOT YET
 void student_namespace::Panel::viewRecentTransactions()
 {
-    cout << "Sharifi Ridi :)";
+    // for (Transaction item : _recentTransactions)
+    // {
+    //     item.print();
+    // }
 }
 
 void student_namespace::Panel::exit()
