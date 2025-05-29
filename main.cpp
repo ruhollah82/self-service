@@ -8,6 +8,7 @@
 #include <iostream>
 #include <filesystem>
 #include <nlohmann/json.hpp>
+// #include "utils/StringUtils.hpp"
 
 using namespace std;
 using json = nlohmann::json;
@@ -23,7 +24,6 @@ int main()
     bool is_student, status = false;
     while (!status)
         status = loginIntractive(is_student);
-
     if (is_student)
     {
         student_namespace::Panel panel;

@@ -65,3 +65,80 @@ int FoodService<DinningHall>::getLastID()
 
     return -1;
 }
+
+template <>
+bool FoodService<Meal>::updateLastID(int id)
+{
+    auto file = config::ConfigPaths::instance().j_foodservice_ids;
+    bool status = false;
+    if (!FileSystem::exists(file))
+    {
+        if (initialIDFile())
+        {
+            status = true;
+        }
+        else
+            status = false;
+    }
+    else
+        status = true;
+    if (status)
+    {
+        try
+        {
+            ifstream reader(file);
+            json j = json::parse(reader);
+            reader.close();
+            ofstream writer(file);
+            j["meal-id"] = id;
+            // cout << j.dump(5) << endl;
+            writer << j;
+            writer.close();
+            return true;
+        }
+        catch (exception &e)
+        {
+            cerr << e.what() << "\nhappend during updating the meal Last ID :(\n";
+            return false;
+        }
+    }
+    else
+        return false;
+}
+
+template <>
+bool FoodService<DinningHall>::updateLastID(int id)
+{
+    auto file = config::ConfigPaths::instance().j_foodservice_ids;
+    bool status = false;
+    if (!FileSystem::exists(file))
+    {
+        if (initialIDFile())
+        {
+            status = true;
+        }
+        else
+            status = false;
+    }
+    else
+        status = true;
+    if (status)
+    {
+        try
+        {
+            fstream writer(file, ios::in | ios::out);
+            json j = json::parse(writer);
+            j["d-id"] = id;
+            writer << id;
+            writer.close();
+            return true;
+        }
+        catch (exception &e)
+        {
+            cerr << e.what() << "\nhappend during updating the DinningHall Last ID :(\n";
+            return false;
+        }
+    }
+    else
+        return false;
+}

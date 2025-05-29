@@ -17,8 +17,8 @@ DinningHall::DinningHall(int hallID, string name, string address, int capacity)
 
 void DinningHall::print()
 {
-    cout << "Dining Hall Information:" << endl;
-    cout << "Hall ID: " << getHallID() << endl;
+    cout << "Dining Hall " << this->getHallID() << " Information:" << endl;
+    // cout << "Hall ID: " << getHallID() << endl;
     cout << "Name: " << getName() << endl;
     cout << "Address: " << getAddress() << endl;
     cout << "Capacity: " << getCapacity() << endl;
@@ -27,9 +27,9 @@ void DinningHall::input()
 {
     cout << "enter the name: ";
     string name, address;
-    cin >> name;
+    getline(cin, name);
     cout << "enter the address: ";
-    cin >> address;
+    getline(cin, address);
     int cap;
     cout << "enter the capacity: ";
     cin >> cap;

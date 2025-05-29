@@ -22,6 +22,7 @@ namespace filling
         static vector<T> giveAll();
         static bool save(vector<T>);
         static int getLastID();
+        static bool updateLastID(int);
 
     private:
         static fs::path giveFile();
@@ -57,8 +58,9 @@ namespace filling
             return false;
         try
         {
-            json j;
-            j = list;
+            json j(list);
+            // j = list;
+            // cout << j;
             writer << j;
             writer.close();
             return true;
@@ -73,6 +75,10 @@ namespace filling
     int FoodService<Meal>::getLastID();
     template <>
     int FoodService<DinningHall>::getLastID();
+    template <>
+    bool FoodService<Meal>::updateLastID(int);
+    template <>
+    bool FoodService<DinningHall>::updateLastID(int);
     template <typename T>
     bool FoodService<T>::initialIDFile()
     {

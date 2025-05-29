@@ -26,14 +26,10 @@ void Storage::addDinningHall(DinningHall d)
 
 vector<Meal>::iterator Storage::findMeal(int id)
 {
-    for (auto i = allMeals.begin(); i != allMeals.end(); i++)
-    {
-        if (i->getMealID() == id)
-        {
-            return i;
-        }
-    }
-    return allMeals.end();
+    vector<Meal>::iterator i = allMeals.begin();
+    for (; i != allMeals.end() && i->getMealID() != id; i++)
+        ;
+    return i;
 }
 vector<DinningHall>::iterator Storage::findDiningHall(int id)
 {
@@ -48,17 +44,33 @@ vector<DinningHall>::iterator Storage::findDiningHall(int id)
 }
 void Storage::removeMeal(int id)
 {
-    allMeals.erase(findMeal(id));
+    vector<Meal>::iterator i = findMeal(id);
+    if (i == allMeals.end())
+    {
+        cerr << "Meal with id " << id << " doesn't exists :(" << endl;
+        return;
+    }
+    allMeals.erase(i);
 }
 void Storage::removeDinningHall(int id)
 {
-    allDiningHalls.erase(findDiningHall(id));
+    vector<DinningHall>::iterator i = findDiningHall(id);
+    if (i == allDiningHalls.end())
+    {
+        cerr << "DinningHall with id " << id << " doesn't exists :(" << endl;
+        return;
+    }
+    allDiningHalls.erase(i);
 }
 
 void Storage::MealActivation(int id, bool activation)
 {
-    if (activation)
-        findMeal(id)->activate();
+    vector<Meal>::iterator i = findMeal(id);
+    if (i != allMeals.end())
+        if (activation)
+            findMeal(id)->activate();
+        else
+            findMeal(id)->deactivate();
     else
-        findMeal(id)->deactivate();
+        cerr << "Meal with id " << id << " doesn't exists :(";
 }

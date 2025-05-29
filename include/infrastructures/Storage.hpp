@@ -25,6 +25,8 @@ public:
     void removeMeal(int);
     void removeDinningHall(int);
     void MealActivation(int, bool);
+    int getMealLastID() { return _mealIDCounter; }
+    int getDinningHallLastID() { return _diningHallIDCounter; }
     vector<Meal>::iterator findMeal(int);
     vector<DinningHall>::iterator findDiningHall(int);
     vector<DinningHall> allDiningHalls;

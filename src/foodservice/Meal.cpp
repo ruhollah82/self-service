@@ -3,6 +3,8 @@
 #include <iostream>
 #include "foodservice/Meal.hpp"
 #include "infrastructures/Storage.hpp"
+#include "interface/Panel.hpp"
+#include "utils/StringUtils.hpp"
 using namespace std;
 using json = nlohmann::json;
 
@@ -19,8 +21,7 @@ Meal::Meal(int id, string name, float price, vector<string> sideItems)
 }
 void Meal::print()
 {
-    cout << "Meal Information:" << endl;
-    cout << "Meal ID: " << getMealID() << endl;
+    cout << "Meal " << this->getMealID() << " Information:" << endl;
     cout << "Name: " << getName() << endl;
     cout << "Price: " << getPrice() << endl;
     cout << "Active: " << (isActive() ? "Yes" : "No") << endl;
@@ -39,10 +40,13 @@ void Meal::print()
     }
     cout << endl;
     cout << "Side Items: ";
-    for (const auto &item : getSideItems())
-    {
-        cout << item << " ";
-    }
+    if (getSideItems().size())
+        for (const auto &item : getSideItems())
+        {
+            cout << item << " ";
+        }
+    else
+        cout << "Nothing";
     cout << endl;
 }
 
@@ -69,8 +73,29 @@ void Meal::input()
     getline(cin, name);
     cout << "enter the price: ";
     cin >> price;
+    MealType type = panel_utils::_chooseMealType();
+    ReserveDay day = panel_utils::_chooseDay();
     this->setName(name);
     this->setPrice(price);
+    this->setMealType(type);
+    this->setResesrveDay(day);
+    this->activate();
+    cout << "enter the side items seperated by '-': ";
+    string side_item;
+    cin.ignore();
+    getline(cin, side_item);
+    if (side_item[side_item.size() - 1] != '-')
+    {
+        side_item += '-';
+    }
+    stringstream ss = stringstream(side_item);
+    this->_sideItems.clear();
+    while (getline(ss, side_item, '-'))
+    {
+        if (side_item.size())
+            this->addSideItem(string_utils::strip(side_item, ' '));
+    }
+    cout << "Meal Created Successfuly :)" << endl;
 }
 
 // -----------------------------------------------------------

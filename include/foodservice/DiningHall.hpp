@@ -52,12 +52,11 @@ namespace nlohmann
         static void to_json(json &j, const DinningHall &_dinningHall)
         {
             j = json{
-                {
-                    {"id", _dinningHall.getHallID()},
-                    {"address", _dinningHall.getAddress()},
-                    {"name", _dinningHall.getName()},
-                    {"capacity", _dinningHall.getCapacity()},
-                }};
+                {"id", _dinningHall.getHallID()},
+                {"address", _dinningHall.getAddress()},
+                {"name", _dinningHall.getName()},
+                {"capacity", _dinningHall.getCapacity()},
+            };
         }
     };
 }

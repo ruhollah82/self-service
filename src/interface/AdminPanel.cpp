@@ -26,6 +26,8 @@ void admin_namespace::Panel::displayAllMeals()
     for (Meal item : FoodService<Meal>::giveAll())
     {
         item.print();
+        cout << endl
+             << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl;
     }
 }
 void admin_namespace::Panel::displayAllDininigHalls()
@@ -33,6 +35,8 @@ void admin_namespace::Panel::displayAllDininigHalls()
     for (DinningHall item : FoodService<DinningHall>::giveAll())
     {
         item.print();
+        cout << endl
+             << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl;
     }
 }
 
@@ -41,6 +45,8 @@ void admin_namespace::Panel::addNewMealIntractive()
     Meal meal;
     meal.input();
     Storage::instance().addMeal(meal);
+    if (!FoodService<Meal>::updateLastID(Storage::instance().getMealLastID()))
+        cerr << "Saving Meal last id ecounter to a problem :(" << endl;
     FoodService<Meal>::save(Storage::instance().allMeals);
 }
 
@@ -49,6 +55,8 @@ void admin_namespace::Panel::addNewDiningHallIntractive()
     DinningHall d;
     d.input();
     Storage::instance().addDinningHall(d);
+    if (!FoodService<DinningHall>::updateLastID(Storage::instance().getDinningHallLastID()))
+        cerr << "Saving DinningHall last id ecounter to a problem :(" << endl;
     FoodService<DinningHall>::save(Storage::instance().allDiningHalls);
 }
 
@@ -88,6 +96,7 @@ AdminOptions _mapping(int option)
 
 void admin_namespace::Panel::action(int option)
 {
+    cin.ignore();
     switch (_mapping(option))
     {
     case AdminOptions::ADD_MEALS:

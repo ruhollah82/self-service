@@ -9,6 +9,7 @@
 #include "payment/Transaction.hpp"
 #include <algorithm>
 #include <stdexcept>
+#include <limits>
 /*
 UTILITIEs should be added to program:
     - adding colorful printing functions
