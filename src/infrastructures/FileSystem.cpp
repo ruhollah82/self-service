@@ -86,3 +86,27 @@ bool FileSystem::ifNotExistsCreate(fs::path path)
     } // else nothting
     return false;
 }
+
+bool FileSystem::copy_file(fs::path from, fs::path to)
+{
+    if (exists(from))
+    {
+        error_code ec;
+        fs::copy_file(from, to, ec);
+        if (ec)
+        {
+            cerr << ec.message() << endl
+                 << "Got Error while Trying to copy '" << from << "' to '" << to << "' :(\n";
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    else
+    {
+        cerr << "'" << from << "' does't exists :(" << endl;
+        return false;
+    }
+}

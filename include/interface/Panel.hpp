@@ -4,8 +4,10 @@
 #include "utils/Utilities.hpp"
 #include <vector>
 #include <iostream>
+#include <filesystem>
 
 using namespace std;
+namespace fs = std::filesystem;
 
 class Student;
 class Reservation;
@@ -43,7 +45,7 @@ namespace admin_namespace
     class Panel
     {
     public:
-        void chooseCsvFile();
+        void chooseCsvFile(fs::path);
         // Student findStudentByID(int);
         // Student findStudentByStudentID(string);
         // void createNewAdmin();

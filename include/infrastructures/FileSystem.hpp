@@ -10,4 +10,5 @@ public:
     static bool ifNotExistsCreate(fs::path);
     static bool isDir(fs::path);
     static bool isFile(fs::path);
+    static bool copy_file(fs::path, fs::path);
 };

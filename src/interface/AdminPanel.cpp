@@ -5,9 +5,19 @@
 #include "foodservice/Reservation.hpp"
 #include "infrastructures/Storage.hpp"
 #include <vector>
+#include "utils/StringUtils.hpp"
 using namespace std;
 
 using namespace filling;
+
+void getline(istream &in, fs::path &path)
+{
+    string s;
+    getline(cin, s);
+    s = string_utils::strip(s, ' ');
+    s = string_utils::strip(s, '\'');
+    path = fs::path(s);
+}
 
 vector<pair<string, AdminOptions>> options = {
     {"Choose Csv File", AdminOptions::CHOOSE_CSV_FILE},
@@ -156,10 +166,25 @@ void admin_namespace::Panel::action(int option)
         exit(0);
         break;
     }
+    case AdminOptions::CHOOSE_CSV_FILE:
+    {
+        fs::path path;
+        getline(cin, path);
+        chooseCsvFile(path);
+        break;
+    }
     default:
     {
         cerr << "invalid Option :(" << endl;
         break;
     }
     }
+}
+
+void admin_namespace::Panel::chooseCsvFile(fs::path pth)
+{
+    if (FileSystem::copy_file(pth, config::ConfigPaths::instance().c_students))
+        cout << "Csv File choosed successfully :)" << endl;
+    else
+        cerr << "Choosing File Encounter to error :(" << endl;
 }

@@ -36,7 +36,7 @@ namespace config
         fs::path d_admin_sessions = d_sessions / "admins";
         fs::path j_foodservice_ids = d_foodservice / "IDs.json";
 
-        unsigned int session_lifetime_min = 60;
+        // unsigned int session_lifetime_min = 60;
         vector<fs::path> &allDirs();
 
     private:
