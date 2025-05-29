@@ -25,12 +25,13 @@ config::AdminConfig::AdminConfig()
     {
         ifstream reader(file);
         json j = json::parse(reader);
-        this->intialLastID(j.at("user-id").get<int>());
+        this->intialLastID(j.at("admin-id").get<int>());
         reader.close();
     }
-    else
+    else // file doesn't exists
     {
-        throw runtime_error("admin_config file doesn't exists :(");
+        intialLastID(0);
+        save();
     }
 }
 

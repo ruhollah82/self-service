@@ -27,55 +27,6 @@ vector<pair<string, StudentOptions>> _menuOptions = {
     {"Check Balance", StudentOptions::CHECK_BALANCE},
     {"Exit", StudentOptions::EXIT},
 };
-
-vector<pair<string, ReserveDay>> weekDays = {
-    {"Sat", ReserveDay::SAT},
-    {"Sun", ReserveDay::SUN},
-    {"Mon", ReserveDay::MON},
-    {"Tue", ReserveDay::TUE},
-    {"Wed", ReserveDay::WED},
-    {"Thu", ReserveDay::THU},
-    {"Fri", ReserveDay::FRI}};
-
-vector<pair<string, MealType>> mealTypes = {
-    {"Breakfast", MealType::BREAKFAST},
-    {"Lunch", MealType::LUNCH},
-    {"Dinner", MealType::DINNER}};
-
-MealType student_namespace::Panel::_chooseMealType()
-{
-    cout << "Choose a meal type:" << endl;
-    for (int i = 0; i < mealTypes.size(); i++)
-    {
-        cout << i + 1 << ". " << mealTypes[i].first << endl;
-    }
-    int choice;
-    cin >> choice;
-    if (choice < 1 || choice > mealTypes.size())
-    {
-        cout << "Invalid choice. Please try again." << endl;
-        throw invalid_argument("Invalid choice");
-    }
-    return mealTypes[choice - 1].second;
-}
-
-ReserveDay student_namespace::Panel::_chooseDay()
-{
-    cout << "Choose a day for reservation:" << endl;
-    for (int i = 0; i < weekDays.size(); i++)
-    {
-        cout << i + 1 << ". " << weekDays[i].first << endl;
-    }
-    int choice;
-    cin >> choice;
-    if (choice < 1 || choice > weekDays.size())
-    {
-        cout << "Invalid choice. Please try again." << endl;
-        throw invalid_argument("Invalid choice");
-    }
-    return weekDays[choice - 1].second;
-}
-
 Meal student_namespace::Panel::_chooseMeal(MealType mealType, ReserveDay reserveDay)
 {
     vector<Meal> feasible_meals;
@@ -97,24 +48,6 @@ Meal student_namespace::Panel::_chooseMeal(MealType mealType, ReserveDay reserve
     }
     return feasible_meals[choice - 1];
 }
-
-DinningHall student_namespace::Panel::_chooseDiningHall()
-{
-    cout << "Choose a dining hall:" << endl;
-    for (int i = 0; i < Storage::instance().allDiningHalls.size(); i++)
-    {
-        cout << i + 1 << ". " << Storage::instance().allDiningHalls[i].getName() << endl;
-    }
-    int choice;
-    cin >> choice;
-    if (choice < 1 || choice > Storage::instance().allDiningHalls.size())
-    {
-        cout << "Invalid choice. Please try again." << endl;
-        throw invalid_argument("Invalid choice");
-    }
-    return Storage::instance().allDiningHalls[choice - 1];
-}
-
 void student_namespace::Panel::showStudentInfo()
 {
     student_namespace::SessionManager::instance().currentStudent()->print();
@@ -234,9 +167,9 @@ void student_namespace::Panel::Action(int option)
 // TODO: SHOULD BE REMOVED AND CUSTOMIZE FOR addReservation
 void student_namespace::Panel::reserveMeal()
 {
-    MealType mealType = _chooseMealType();
-    ReserveDay reserveDay = _chooseDay();
-    DinningHall diningHall = _chooseDiningHall();
+    MealType mealType = panel_utils::_chooseMealType();
+    ReserveDay reserveDay = panel_utils::_chooseDay();
+    DinningHall diningHall = panel_utils::_chooseDiningHall();
     Meal meal = _chooseMeal(mealType, reserveDay);
     // TODO: MAKE THE RESERVATION ID AUTO INCREMENTED
     // Reservation reservation(0, diningHall, meal, RStatus::NOT_PAID, time(nullptr));

@@ -4,6 +4,8 @@ project(FoodServiceApp)
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+file(MAKE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 # set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -lbcrypt" )
 # Source files
 file(GLOB_RECURSE SOURCES
@@ -17,6 +19,7 @@ file(GLOB_RECURSE SOURCES
     "src/utils/StringUtils.cpp"
     "src/auth/StudentSessionManager.cpp"
     "src/foodservice/Filling.cpp"
+    "src/interface/Panel_utils.cpp"
     "main.cpp"
 )
 include(FetchContent)

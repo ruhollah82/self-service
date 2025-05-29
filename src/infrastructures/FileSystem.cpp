@@ -68,18 +68,21 @@ bool FileSystem::ifNotExistsCreate(fs::path path)
     if (!exists)
     {
         bool file = false;
-        fs::path pPath = path;
-        if (isFile(path))
+        fs::path pPath;
+        string suffix = ".json";
+        if (path.string().substr(path.string().size() - suffix.size(), suffix.size()) == suffix)
         {
             file = true;
             pPath = path.parent_path();
+            if (!FileSystem::exists(pPath))
+                fs::create_directories(pPath);
         }
-        fs::create_directories(pPath);
-        if (file)
+        if (file && !FileSystem::exists(path))
         {
-            ofstream(path);
+            ofstream writer(path);
+            writer.close();
+            return true;
         }
-        return true;
     } // else nothting
-    return true;
+    return false;
 }

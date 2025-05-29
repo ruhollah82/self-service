@@ -56,7 +56,7 @@ void admin_namespace::SessionManager::save_session()
     }
 }
 
-void admin_namespace::SessionManager::login(string name, string password)
+bool admin_namespace::SessionManager::login(string name, string password)
 {
     if (filling::Auth<SessionManager>::sessionExists(name))
     {
@@ -65,16 +65,19 @@ void admin_namespace::SessionManager::login(string name, string password)
         {
             this->setLastLogin(time(0));
             this->setStatus(SessionStatus::AUTHENTICATED);
+            return 1;
         }
         else
         {
             this->logout();
-            cerr << "Wrong Answer :(";
+            cerr << "Wrong Password :(" << endl;
+            return 0;
         }
     }
     else
     {
-        cerr << "There isn't any Admin Session with specified name :(";
+        cerr << "There isn't any Admin Session with specified name :(" << endl;
+        return 0;
     }
 }
 
@@ -91,7 +94,7 @@ bool SessionManager::isThereAnyAdmin()
 bool SessionManager::sign_in(string name, string lastname, string password)
 {
     Admin *temp = new Admin(config::AdminConfig::instance().getLastIDandIncrease(), name, lastname, "");
-    temp->setHashedPassword(password);
+    temp->setPassword(password);
     instance().setCurrentAdmin(temp);
     instance().setAdminID(temp->getID());
     instance().setCreatedAT(time(0));
@@ -99,4 +102,25 @@ bool SessionManager::sign_in(string name, string lastname, string password)
     instance().save_session();
     instance().logout();
     return true; // using try catch
+}
+
+void nlohmann::adl_serializer<SessionManager>::to_json(json &j, const admin_namespace::SessionManager &rh)
+{
+    j = json{
+        {"id", rh.getAdminId()},
+        {"currentAdmin", *rh.currentAdmin()},
+        {"created-at", rh.getCreatedAT()},
+        {"lasttime-loggedin", rh.getLastLogin()},
+        {"status", rh.getStatus()},
+
+    };
+}
+
+void nlohmann::adl_serializer<SessionManager>::from_json(const json &j, admin_namespace::SessionManager &rh)
+{
+    rh.setAdminID(j.at("id").get<int>());
+    rh.setCreatedAT(j.at("created-at").get<time_t>());
+    rh.setCurrentAdmin(new Admin(j.at("currentAdmin").get<Admin>()));
+    rh.setLastLogin(j.at("lasttime-loggedin").get<time_t>());
+    rh.setStatus(j.at("status").get<SessionStatus>());
 }

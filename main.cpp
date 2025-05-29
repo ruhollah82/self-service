@@ -15,12 +15,15 @@ namespace fs = std::filesystem;
 void initialization();
 void createDirs();
 void admin_sign_in();
-bool loginIntractive();
+bool loginIntractive(bool &);
 
 int main()
 {
     initialization();
-    bool is_student = loginIntractive();
+    bool is_student, status = false;
+    while (!status)
+        status = loginIntractive(is_student);
+
     if (is_student)
     {
         student_namespace::Panel panel;
@@ -35,12 +38,12 @@ int main()
     else
     {
         admin_namespace::Panel panel;
-        int action = 0;
+        int option = 0;
         while (true)
         {
             panel.showMenu();
-            cin >> action;
-            panel.action(action);
+            cin >> option;
+            panel.action(option);
         }
     }
 
@@ -54,7 +57,7 @@ void initialization()
     {
         cout << "Seems this is the first time that program is running so WELLCOME :)";
         cout << endl
-             << "Please Enter your info as System Admin: ";
+             << "Please Enter your info as System Admin: " << endl;
         admin_sign_in();
     }
 }
@@ -63,9 +66,9 @@ void createDirs()
 {
     for (auto path : config::ConfigPaths::instance().allDirs())
     {
-        if (!FileSystem::ifNotExistsCreate(path))
+        if (FileSystem::ifNotExistsCreate(path) && !FileSystem::exists(path))
         {
-            cerr << "Seems we can't continue :(";
+            cerr << "Seems we can't continue :(" << endl;
             exit(0);
         }
     }
@@ -85,31 +88,30 @@ void admin_sign_in()
     if (password == repPassword)
     {
         admin_namespace::SessionManager::sign_in(name, lastname, password);
-        cout << "Hooray The SINGIN process was Successful :)";
+        cout << "Hooray The SINGING process was Successful :)" << endl;
     }
     else
     {
-        cerr << "Password and it's Repeatation didn't match so GOOD BYE :)";
+        cerr << "Password and it's Repeatation didn't match so GOOD BYE :)" << endl;
         exit(0);
     }
 }
 
-bool loginIntractive()
+bool loginIntractive(bool &is_student)
 {
     string username, password;
     cout << "Enter your username: ";
     getline(cin, username);
     cout << "Enter your Password: ";
     getline(cin, password);
-    bool is_student = all_of(username.begin(), username.end(), [](char c)
-                             { return isdigit(c); });
+    is_student = all_of(username.begin(), username.end(), [](char c)
+                        { return isdigit(c); });
     if (is_student)
     {
-        student_namespace::SessionManager::instance().login(username, password);
+        return student_namespace::SessionManager::instance().login(username, password);
     }
     else
     {
-        admin_namespace::SessionManager::instance().login(username, password);
+        return admin_namespace::SessionManager::instance().login(username, password);
     }
-    return is_student;
 }

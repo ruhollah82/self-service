@@ -24,7 +24,7 @@ public:
     {
         this->_status = status;
     }
-    virtual void login(string, string) = 0;
+    virtual bool login(string, string) = 0;
     virtual void logout() = 0;
     void setCreatedAT(time_t t) { this->_created_at = t; }
 
@@ -50,7 +50,7 @@ namespace student_namespace
             static SessionManager _instance;
             return _instance;
         }
-        void login(string, string) override;
+        bool login(string, string) override;
         void logout() override;
 
         Student *currentStudent() const
@@ -103,7 +103,7 @@ namespace admin_namespace
         static bool sign_in(string, string, string);
         static bool isThereAnyAdmin();
 
-        void login(string, string) override;
+        bool login(string, string) override;
         void logout() override;
 
         Admin *currentAdmin() const
@@ -146,25 +146,8 @@ namespace nlohmann
     template <>
     struct adl_serializer<admin_namespace::SessionManager>
     {
-
-        static void to_json(json &j, const admin_namespace::SessionManager &rh)
-        {
-            j = json{
-                {"id", rh.getAdminId()},
-                {"created-at", rh.getCreatedAT()},
-                {"lasttime-loggedin", rh.getLastLogin()},
-                {"status", rh.getStatus()},
-
-            };
-        }
-
-        static void from_json(const json &j, admin_namespace::SessionManager &rh)
-        {
-            rh.setAdminID(j.at("student-id").get<int>());
-            rh.setCreatedAT(j.at("created-at").get<time_t>());
-            rh.setLastLogin(j.at("lasttime-loggedin").get<time_t>());
-            rh.setStatus(j.at("status").get<SessionStatus>());
-        }
+        static void to_json(json &, const admin_namespace::SessionManager &);
+        static void from_json(const json &, admin_namespace::SessionManager &);
     };
 }
 #endif

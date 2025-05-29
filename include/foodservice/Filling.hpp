@@ -35,9 +35,18 @@ namespace filling
         {
             std::cout << file << " is created successfuly :)" << endl;
         }
-        fstream reader(file, ios::in);
-        json jfile = json::parse(reader);
-        return jfile.get<vector<T>>();
+        if (FileSystem::exists(file))
+        {
+            ifstream reader(file);
+            reader.seekg(0, ios::end);
+            if (reader.tellg() != 0)
+            {
+                reader.seekg(0);
+                json jfile = json::parse(reader);
+                return jfile.get<vector<T>>();
+            }
+        }
+        return vector<T>();
     }
     template <typename T>
     bool FoodService<T>::save(vector<T> list)

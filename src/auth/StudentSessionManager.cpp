@@ -15,7 +15,7 @@ student_namespace::SessionManager::SessionManager() : _student_id(-1)
 }
 
 // Implementation of overrided fucntions
-void student_namespace::SessionManager::login(string student_id, string password)
+bool student_namespace::SessionManager::login(string student_id, string password)
 {
     if (filling::Auth<SessionManager>::sessionExists(student_id))
     {
@@ -24,11 +24,13 @@ void student_namespace::SessionManager::login(string student_id, string password
         {
             this->setLastLogin(time(0));
             this->setStatus(SessionStatus::AUTHENTICATED);
+            return true;
         }
         else
         {
             this->logout();
             cerr << "Wrong Password :(";
+            return false;
         }
     }
     Student temp;
@@ -41,12 +43,15 @@ void student_namespace::SessionManager::login(string student_id, string password
             this->setStudentID(temp.getID());
             this->setShoppingCart(new ShoppingCart());
             this->setLastLogin(time(0));
+            return true;
         }
     }
     catch (exception &e)
     {
         cerr << e.what() << endl;
+        return false;
     }
+    return false;
 }
 
 void student_namespace::SessionManager::logout()

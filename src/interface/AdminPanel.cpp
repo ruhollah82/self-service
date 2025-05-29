@@ -6,7 +6,7 @@
 #include "infrastructures/Storage.hpp"
 #include <vector>
 using namespace std;
-using namespace admin_namespace;
+
 using namespace filling;
 
 vector<pair<string, AdminOptions>> options = {
@@ -21,14 +21,14 @@ vector<pair<string, AdminOptions>> options = {
     {"Exit", AdminOptions::EXIT},
 };
 
-void Panel::displayAllMeals()
+void admin_namespace::Panel::displayAllMeals()
 {
     for (Meal item : FoodService<Meal>::giveAll())
     {
         item.print();
     }
 }
-void Panel::displayAllDininigHalls()
+void admin_namespace::Panel::displayAllDininigHalls()
 {
     for (DinningHall item : FoodService<DinningHall>::giveAll())
     {
@@ -36,7 +36,7 @@ void Panel::displayAllDininigHalls()
     }
 }
 
-void Panel::addNewMealIntractive()
+void admin_namespace::Panel::addNewMealIntractive()
 {
     Meal meal;
     meal.input();
@@ -44,7 +44,7 @@ void Panel::addNewMealIntractive()
     FoodService<Meal>::save(Storage::instance().allMeals);
 }
 
-void Panel::addNewDiningHallIntractive()
+void admin_namespace::Panel::addNewDiningHallIntractive()
 {
     DinningHall d;
     d.input();
@@ -52,24 +52,24 @@ void Panel::addNewDiningHallIntractive()
     FoodService<DinningHall>::save(Storage::instance().allDiningHalls);
 }
 
-void Panel::mealAcitvation(int id, bool activation)
+void admin_namespace::Panel::mealAcitvation(int id, bool activation)
 {
     Storage::instance().MealActivation(id, activation);
     FoodService<Meal>::save(Storage::instance().allMeals);
 }
 
-void Panel::removeDiningHall(int id)
+void admin_namespace::Panel::removeDiningHall(int id)
 {
     Storage::instance().removeDinningHall(id);
     FoodService<DinningHall>::save(Storage::instance().allDiningHalls);
 }
-void Panel::removeMeal(int id)
+void admin_namespace::Panel::removeMeal(int id)
 {
     Storage::instance().removeMeal(id);
     FoodService<Meal>::save(Storage::instance().allMeals);
 }
 
-void Panel::showMenu()
+void admin_namespace::Panel::showMenu()
 {
     for (int i = 0; i < options.size(); i++)
     {
@@ -86,7 +86,7 @@ AdminOptions _mapping(int option)
         return options[option - 1].second;
 }
 
-void Panel::action(int option)
+void admin_namespace::Panel::action(int option)
 {
     switch (_mapping(option))
     {
@@ -133,7 +133,7 @@ void Panel::action(int option)
     }
     case AdminOptions::DISPLAY_ALL_DINNINGHALLS:
     {
-        this->displayAllMeals();
+        this->displayAllDininigHalls();
         break;
     }
     case AdminOptions::DISPLAY_ALL_MEALS:

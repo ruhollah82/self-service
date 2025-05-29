@@ -33,10 +33,7 @@ namespace student_namespace
         void defaultOption();
 
     private:
-        ReserveDay _chooseDay();
         Meal _chooseMeal(MealType, ReserveDay);
-        DinningHall _chooseDiningHall();
-        MealType _chooseMealType();
         StudentOptions _mapping(int);
     };
 }
@@ -71,6 +68,13 @@ namespace admin_namespace
         // i don't think there should be anything
     };
 
+}
+
+namespace panel_utils
+{
+    ReserveDay _chooseDay();
+    DinningHall _chooseDiningHall();
+    MealType _chooseMealType();
 }
 
 #endif // PANEL_H
